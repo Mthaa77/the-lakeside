@@ -1,0 +1,13 @@
+{
+  "name": "The Lakeside — Weddings & Events",
+  "short_name": "The Lakeside",
+  "description": "Glass chapel wedding venue in Tiegerpoort, Pretoria East. Where glass meets lake.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F6F3EE",
+  "theme_color": "#10261E",
+  "icons": [
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

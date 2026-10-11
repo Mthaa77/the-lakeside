@@ -1,0 +1,726 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  /* Brand palette */
+  --color-pine-950: #0A1B15;
+  --color-pine-900: #10261E;
+  --color-pine-800: #142E24;
+  --color-pine-700: #1D3B30;
+  --color-pine-600: #27503F;
+  --color-lake-700: #2E434E;
+  --color-lake-600: #3B5560;
+  --color-lake-400: #6E8B96;
+  --color-lake-300: #9DB4BC;
+  --color-lake-200: #C4D3D9;
+  --color-marble-50: #F6F3EE;
+  --color-marble-100: #ECE7DE;
+  --color-marble-200: #DFD8CB;
+  --color-sand-300: #D9C8A9;
+  --color-sand-200: #E5D9C2;
+  --color-brass-400: #CBb088;
+  --color-brass-500: #B89B6A;
+  --color-brass-600: #9C8052;
+  --color-brass-700: #7D6640;
+  --color-ember-500: #C8613A;
+  --color-ember-600: #A84E2E;
+  --color-ember-700: #8C3F24;
+  /* Ruby — the "red carpet / red rose" accent scale (round 18) */
+  --color-ruby-300: #E9908A;
+  --color-ruby-400: #D95F57;
+  --color-ruby-500: #C13A34;
+  --color-ruby-600: #A02A28;
+  --color-ruby-700: #7E1F20;
+  --color-ruby-800: #5E1618;
+  /* Polished gold highlights (glossy gradients sit on top of brass) */
+  --color-gold-200: #F6E8C8;
+  --color-gold-300: #EDD6A4;
+  --color-gold-400: #DFC28C;
+  --color-ink-900: #14181A;
+  --color-ink-600: #4C5659;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: #F6F3EE;
+  --foreground: #14181A;
+  --card: #FFFFFF;
+  --card-foreground: #14181A;
+  --popover: #FFFFFF;
+  --popover-foreground: #14181A;
+  --primary: #10261E;
+  --primary-foreground: #F6F3EE;
+  --secondary: #ECE7DE;
+  --secondary-foreground: #10261E;
+  --muted: #ECE7DE;
+  --muted-foreground: #4C5659;
+  --accent: #B89B6A;
+  --accent-foreground: #FFFFFF;
+  --destructive: #C8613A;
+  --border: #DFD8CB;
+  --input: #DFD8CB;
+  --ring: #B89B6A;
+  --chart-1: #B89B6A;
+  --chart-2: #10261E;
+  --chart-3: #3B5560;
+  --chart-4: #D9C8A9;
+  --chart-5: #C8613A;
+  --sidebar: #F6F3EE;
+  --sidebar-foreground: #14181A;
+  --sidebar-primary: #10261E;
+  --sidebar-primary-foreground: #F6F3EE;
+  --sidebar-accent: #ECE7DE;
+  --sidebar-accent-foreground: #10261E;
+  --sidebar-border: #DFD8CB;
+  --sidebar-ring: #B89B6A;
+}
+
+.dark {
+  --background: #10261E;
+  --foreground: #F6F3EE;
+  --card: #142E24;
+  --card-foreground: #F6F3EE;
+  --popover: #142E24;
+  --popover-foreground: #F6F3EE;
+  --primary: #B89B6A;
+  --primary-foreground: #10261E;
+  --secondary: #1D3B30;
+  --secondary-foreground: #F6F3EE;
+  --muted: #1D3B30;
+  --muted-foreground: #9DB4BC;
+  --accent: #B89B6A;
+  --accent-foreground: #10261E;
+  --destructive: #C8613A;
+  --border: #27503F;
+  --input: #27503F;
+  --ring: #B89B6A;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    /* framer-motion's useScroll({ target }) measures the target against the
+       scrolling element (html). A static position there trips its dev-mode
+       "non-static position" warning on every scroll-linked section. Making
+       the root non-static has no effect on scrolling or fixed positioning
+       (only transform/filter create fixed-positioning containing blocks). */
+    position: relative;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Outfit everywhere by default (the --font-sans theme mapping alone
+       doesn't reach Tailwind's preflight body stack). */
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "liga" 1, "kern" 1;
+    /* Outfit is geometric: a whisper of tracking keeps small sizes legible. */
+    letter-spacing: 0.004em;
+  }
+  ::selection {
+    background: rgba(184, 155, 106, 0.35);
+  }
+}
+
+/* ── The Lakeside signature classes ─────────────────────────────────────── */
+
+/* Display serif (Playfair Display): tightened tracking so large headlines
+   set with the even rhythm of an editorial masthead. */
+.font-display {
+  font-family: var(--font-display), "Playfair Display", Georgia, serif;
+  letter-spacing: -0.015em;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* Gold accent words set in the serif's true italic — the typographic
+   signature of the round-20 refresh. */
+.font-display em,
+.accent-italic {
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 24px 60px -24px rgba(16, 38, 30, 0.45);
+}
+
+.glass-card-light {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  border: 1px solid rgba(184, 155, 106, 0.25);
+}
+
+.brass-hairline {
+  background: linear-gradient(90deg, transparent, rgba(184,155,106,0.7), transparent);
+  height: 1px;
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* Marble noise texture (CSS-only, no image) */
+.marble-texture {
+  position: relative;
+}
+.marble-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Custom scrollbar */
+.max-h-scroll { max-height: 24rem; overflow-y: auto; }
+.max-h-scroll::-webkit-scrollbar { width: 6px; }
+.max-h-scroll::-webkit-scrollbar-track { background: transparent; }
+.max-h-scroll::-webkit-scrollbar-thumb { background: rgba(184,155,106,0.4); border-radius: 3px; }
+.max-h-scroll::-webkit-scrollbar-thumb:hover { background: rgba(184,155,106,0.7); }
+.scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(184,155,106,0.4); border-radius: 3px; }
+
+/* Anchor sections: never hide titles under the fixed header */
+section[id], div[id="top"], form[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* Anchor links: smooth + offset */
+html {
+  scroll-padding-top: 4.5rem;
+}
+
+/* Reveal on scroll (JS adds .revealed) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 640ms cubic-bezier(.22,1,.36,1), transform 640ms cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--color-brass-500);
+  outline-offset: 2px;
+}
+
+/* Numeral alignment in tables */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Hide scrollbar for chip rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Safe-area for mobile bottom bar */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* ── CTA shine sweep (hover micro-interaction) ──────────────────────────── */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -30%;
+  width: 36%;
+  transform: skewX(-18deg) translateX(-140%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+.btn-shine:hover::after,
+.btn-shine:focus-visible::after {
+  transform: skewX(-18deg) translateX(460%);
+}
+
+/* ── Eyebrow dash: small brass rule before section eyebrows ─────────────── */
+.eyebrow-dash::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.65;
+  vertical-align: middle;
+  margin-right: 0.6em;
+}
+
+/* ── Brand text selection (was browser-default blue) ────────────────────── */
+::selection {
+  background: var(--color-brass-500);
+  color: var(--color-pine-900);
+}
+
+/* ── Cinematic system (round 17) ─────────────────────────────────────────── */
+
+/* Film grain: SVG noise, jittered in steps, barely-there. Decorative only. */
+.cine-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cine-grain--live {
+    animation: grain-shift 1.4s steps(4) infinite;
+  }
+}
+@keyframes grain-shift {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(-7px, 5px, 0); }
+  50%  { transform: translate3d(6px, -6px, 0); }
+  75%  { transform: translate3d(-4px, -3px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Lens vignette: soft dark falloff at the frame edges */
+.cine-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 95% at 50% 40%, transparent 52%, rgba(11, 26, 21, 0.42) 100%);
+}
+
+/* Hero film reel: stacked frames crossfade over alternating ken-burns moves */
+.cine-frame {
+  opacity: 0;
+  transition: opacity 2200ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+.cine-frame.is-active { opacity: 1; }
+@keyframes cine-kb-a {
+  from { transform: scale(1.03) translate3d(-1.1%, 0.7%, 0); }
+  to   { transform: scale(1.13) translate3d(1.1%, -0.7%, 0); }
+}
+@keyframes cine-kb-b {
+  from { transform: scale(1.13) translate3d(1.2%, -0.6%, 0); }
+  to   { transform: scale(1.04) translate3d(-1%, 0.6%, 0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cine-frame.is-active.kb-a { animation: cine-kb-a 10s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+  .cine-frame.is-active.kb-b { animation: cine-kb-b 10s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+}
+
+/* Letterbox entrance: cinema bars retract once the page is ready */
+.cine-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 11vh;
+  background: #0b1a15;
+  z-index: 30;
+  pointer-events: none;
+  transition: transform 1500ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.cine-bar--top { top: 0; }
+.cine-bar--bottom { bottom: 0; }
+.cine-bars-open .cine-bar--top { transform: translateY(-101%); }
+.cine-bars-open .cine-bar--bottom { transform: translateY(101%); }
+@media (prefers-reduced-motion: reduce) {
+  .cine-bar { display: none; }
+}
+
+/* Cinematic heading reveal: wipe downward like a credits title.
+   NB: Chromium counts an element's own clip-path in IntersectionObserver, so
+   the initial clip must leave a sliver (opacity 0 keeps it invisible) or the
+   reveal can never fire. */
+.reveal-cine {
+  opacity: 0;
+  clip-path: inset(0 0 96% 0);
+  transform: translateY(16px);
+  transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 950ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, clip-path, transform;
+}
+.reveal-cine.revealed {
+  opacity: 1;
+  clip-path: inset(0 0 -10% 0);
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-cine { opacity: 1; clip-path: none; transform: none; transition: none; }
+}
+
+/* Brass frame corners: four corner ticks inside a media frame */
+.frame-corners { position: relative; }
+.frame-corners::before,
+.frame-corners::after,
+.frame-corners > .fc-b::before,
+.frame-corners > .fc-b::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 0 solid var(--color-brass-500);
+  opacity: 0.9;
+  z-index: 2;
+  pointer-events: none;
+}
+.frame-corners::before { top: 12px; left: 12px; border-top-width: 1px; border-left-width: 1px; }
+.frame-corners::after { top: 12px; right: 12px; border-top-width: 1px; border-right-width: 1px; }
+.frame-corners > .fc-b::before { bottom: 12px; left: 12px; border-bottom-width: 1px; border-left-width: 1px; }
+.frame-corners > .fc-b::after { bottom: 12px; right: 12px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* Slow sheen that wanders across a full-width band */
+@keyframes band-sheen {
+  0% { transform: translateX(-130%) skewX(-16deg); }
+  60%, 100% { transform: translateX(320%) skewX(-16deg); }
+}
+.band-sheen {
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  animation: band-sheen 12s ease-in-out infinite;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .band-sheen { display: none; }
+}
+
+/* Film-slate caption: fades up when the reel changes frame */
+@keyframes slate-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slate-in { animation: slate-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .slate-in { animation: none; }
+}
+
+/* ── Round 18: glossy gold + ruby system ─────────────────────────────────── */
+
+/* Glossy gold gradient text (display accents, big numbers) */
+.gold-gradient-text {
+  background: linear-gradient(
+    100deg,
+    #8a6c3e 0%,
+    #c8a562 18%,
+    #f2e2b8 38%,
+    #fffaf0 50%,
+    #f2e2b8 62%,
+    #c8a562 82%,
+    #8a6c3e 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gold-gradient-text--live {
+    animation: gold-shift 9s ease-in-out infinite;
+  }
+}
+@keyframes gold-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* Deep gold for light backgrounds — keeps contrast on marble/cream */
+.gold-gradient-text--deep {
+  background: linear-gradient(
+    100deg,
+    #6d5324 0%,
+    #a3813f 20%,
+    #c9a558 38%,
+    #e3c078 50%,
+    #c9a558 62%,
+    #a3813f 82%,
+    #6d5324 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glossy gold surface — buttons, seals, primary dock CTA */
+.gold-surface {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 42%),
+    linear-gradient(180deg, #ecd49c 0%, #cbab6e 48%, #a9894f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 2px rgba(94, 70, 30, 0.35),
+    0 10px 26px -10px rgba(126, 102, 64, 0.65);
+  color: #241a09;
+}
+.gold-surface:hover,
+.gold-surface:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 42%),
+    linear-gradient(180deg, #f4e0ae 0%, #d4b476 48%, #b3935a 100%);
+}
+
+/* Gradient border, dark surfaces (cards over pine) */
+.gold-border-dark {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(rgba(16, 38, 30, 0.92), rgba(16, 38, 30, 0.92)) padding-box,
+    linear-gradient(140deg, rgba(246, 232, 200, 0.75), rgba(184, 155, 106, 0.28) 38%, rgba(193, 58, 52, 0.4) 62%, rgba(246, 232, 200, 0.55)) border-box;
+}
+
+/* Gradient border, light surfaces (cards over marble) */
+.gold-border-light {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(140deg, #b89b6a, rgba(184, 155, 106, 0.25) 40%, rgba(193, 58, 52, 0.35) 68%, #d9c8a9) border-box;
+}
+
+/* Ruby / gold ambient blooms (decorative, absolute-positioned) */
+.ruby-bloom {
+  background: radial-gradient(closest-side, rgba(193, 58, 52, 0.38), rgba(193, 58, 52, 0.12) 55%, transparent 100%);
+}
+.gold-bloom {
+  background: radial-gradient(closest-side, rgba(222, 184, 110, 0.34), rgba(222, 184, 110, 0.1) 55%, transparent 100%);
+}
+
+/* Wax-seal dot: tiny ruby disc with a highlight, used on eyebrows/badges */
+.wax-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 32% 28%, #e98b8a, #c13a34 55%, #7e1f20 100%);
+  box-shadow: 0 0 0 1.5px rgba(246, 232, 200, 0.28), 0 2px 5px rgba(94, 22, 24, 0.45);
+}
+
+/* Dock glass: floating dock surface */
+.dock-glass {
+  background: linear-gradient(180deg, rgba(22, 46, 37, 0.86), rgba(11, 26, 21, 0.92));
+  backdrop-filter: blur(20px) saturate(1.35);
+  -webkit-backdrop-filter: blur(20px) saturate(1.35);
+  border: 1px solid rgba(222, 184, 110, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 24px 55px -18px rgba(5, 14, 11, 0.75);
+}
+.dock-glass--light {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 243, 238, 0.86));
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid rgba(184, 155, 106, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 22px 50px -18px rgba(16, 38, 30, 0.55);
+}
+
+/* 35mm film sprocket strip (film-strips + hero frame) */
+.film-sprockets {
+  height: 12px;
+  background-image: radial-gradient(circle, rgba(246, 243, 238, 0.32) 2.1px, transparent 2.6px);
+  background-size: 18px 12px;
+  background-position: center;
+  background-repeat: repeat-x;
+}
+
+/* Slow rotation for the circular "est. 1995" seal text */
+@keyframes seal-spin {
+  to { transform: rotate(360deg); }
+}
+.seal-spin { animation: seal-spin 26s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .seal-spin { animation: none; }
+}
+
+/* Film-strip marquee rows */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track--left  { animation: marquee-left 64s linear infinite; }
+  .marquee-track--right { animation: marquee-right 74s linear infinite; }
+  .film-strip:hover .marquee-track--left,
+  .film-strip:hover .marquee-track--right { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track--left, .marquee-track--right { transform: none; }
+}
+
+/* ── Round 21: navbar, champagne washes & gradient accents ───────────────── */
+
+/* Dark gilded glass for the scrolled navbar — sits happily over both the
+   pine theatre sections and the marble ones. */
+.navbar-glass {
+  background: linear-gradient(180deg, rgba(11, 26, 21, 0.9), rgba(11, 26, 21, 0.78));
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  border-bottom: 1px solid rgba(222, 184, 110, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 50px -22px rgba(5, 14, 11, 0.85);
+}
+
+/* Soft champagne light pooling from the top of a light section */
+.champagne-wash {
+  background:
+    radial-gradient(58% 46% at 50% 0%, rgba(222, 184, 110, 0.16), transparent 72%),
+    radial-gradient(34% 30% at 88% 88%, rgba(193, 58, 52, 0.05), transparent 70%);
+}
+
+/* Gold → ruby gradient text — the "rosé" accent for celebratory words */
+.gold-ruby-gradient-text {
+  background: linear-gradient(
+    100deg,
+    #8a6c3e 0%,
+    #c8a562 20%,
+    #f2e2b8 36%,
+    #e9908a 52%,
+    #d95f57 64%,
+    #c8a562 84%,
+    #8a6c3e 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gentle levitation for floating ornaments */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .float-slow { animation: float-slow 7s ease-in-out infinite; }
+}
+
+/* ── Print: only the estimate results card ──────────────────────────────── */
+@media print {
+  html.print-estimate body * {
+    visibility: hidden;
+    box-shadow: none !important;
+  }
+  html.print-estimate #estimate-print-root,
+  html.print-estimate #estimate-print-root * {
+    visibility: visible;
+  }
+  html.print-estimate #estimate-print-root {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    border: none;
+    background: #ffffff !important;
+    padding: 1.5rem 1rem;
+  }
+  html.print-estimate .glass-card-light {
+    backdrop-filter: none;
+    background: #ffffff !important;
+  }
+  html.print-estimate .bg-pine-900,
+  html.print-estimate [class*="bg-pine-900"] {
+    background: #ffffff !important;
+    color: #10261e !important;
+  }
+  html.print-estimate [class*="text-marble-50"] {
+    color: #10261e !important;
+  }
+  html.print-estimate [class*="text-marble-50/70"],
+  html.print-estimate [class*="text-marble-50/85"] {
+    color: #4c5659 !important;
+  }
+  /* Keep the estimate to sane page breaks */
+  html.print-estimate #estimate-print-root li,
+  html.print-estimate #estimate-print-root ol {
+    break-inside: avoid;
+  }
+}
+
+/* cine v17 */

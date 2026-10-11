@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id               String    @id @default(cuid())
+  createdAt        DateTime  @default(now())
+  firstName        String?
+  lastName         String?
+  email            String?
+  phone            String?
+  weddingDate      String?   // ISO date
+  guests           Int?
+  eventType        String    @default("wedding")
+  message          String?
+  source           String?   // page section / tool
+  quoteId          String?   // short quote id when linked
+  score            Int       @default(0)
+  status           String    @default("new") // new | contacted | viewing_booked | viewed | proposal_sent | booked | lost | spam
+  consentMarketing Boolean   @default(false)
+  consentContact   Boolean   @default(false)
+  waClicked        Boolean   @default(false)
+  notes            String?
+  viewings         Viewing[]
+  rsvps            Rsvp[]
+}
+
+model Quote {
+  id             String   @id @default(cuid())
+  shortId        String   @unique
+  createdAt      DateTime @default(now())
+  inputsJson     String   // JSON: EstimateInput
+  resultJson     String   // JSON: EstimateResult summary
+  pricingVersion String   @default("2026-2027.1")
+  leadId         String?
+}
+
+model Viewing {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  leadId      String?
+  lead        Lead?    @relation(fields: [leadId], references: [id])
+  mode        String   @default("in_person") // in_person | virtual
+  preferredWhen String? // client-stated preference (free-ish)
+  scheduledAt DateTime? // confirmed slot
+  status      String   @default("requested") // requested | scheduled | cancelled | done
+  manageToken String   @unique @default(cuid())
+  // names/contacts denormalised for the notification email
+  firstName   String
+  lastName    String
+  email       String
+  phone       String
+  weddingDate String?
+  guests      Int?
+  notes       String?
+}
+
+model AvailabilityDay {
+  day       String   @id // ISO date
+  state     String   @default("unknown") // available | limited | held | booked | unknown
+  note      String?
+  updatedAt DateTime @default(now())
+}
+
+model FoodExperience {
+  id        String   @id @default(cuid())
+  startsAt  DateTime
+  capacity  Int
+  taken     Int      @default(0)
+  priceZar  Int?
+  notes     String?
+  published Boolean  @default(false)
+  rsvps     Rsvp[]
+}
+
+model Rsvp {
+  id        String         @id @default(cuid())
+  createdAt DateTime       @default(now())
+  eventId   String
+  event     FoodExperience @relation(fields: [eventId], references: [id])
+  leadId    String?
+  lead      Lead?          @relation(fields: [leadId], references: [id])
+  seats     Int            @default(2)
+  dietary   String?
+  status    String         @default("confirmed")
+}
