@@ -39,6 +39,7 @@ import { SITE } from '@/config/site';
 import { PRICING } from '@/config/pricing';
 import { Rings } from './ornaments';
 import { LogoMark } from './logo';
+import { DemoStrip } from './demo-strip';
 
 const NAV = [
   { label: 'The Estate', href: '#estate', icon: Church },
@@ -175,6 +176,17 @@ export function Header() {
             : 'bg-gradient-to-b from-pine-950/75 via-pine-950/25 to-transparent'
         )}
       >
+        {/* ── Demo disclosure — dismissible, rides the fixed header; both it
+            and the booking wire collapse away once the visitor scrolls ── */}
+        <div
+          className={cn(
+            'overflow-hidden transition-all duration-500',
+            scrolled ? 'max-h-0 opacity-0' : 'max-h-12 opacity-100'
+          )}
+        >
+          <DemoStrip />
+        </div>
+
         {/* ── Announcement wire — collapses away once the visitor scrolls ── */}
         <div
           className={cn(
@@ -189,10 +201,10 @@ export function Header() {
             </span>
             <span className="hidden h-3 w-px bg-gold-300/30 sm:block" aria-hidden="true" />
             <span className="hidden sm:block">
-              Saturday hire from R{thin(PRICING.venueHire.sat)}
+              Saturday venue hire R{thin(PRICING.venueHire.sat)} · from R{thin(PRICING.venueHire.monThu)} Mon–Thu
             </span>
             <span className="hidden h-3 w-px bg-gold-300/30 md:block" aria-hidden="true" />
-            <span className="hidden md:block">Family-run since 1995</span>
+            <span className="hidden md:block">Family-run</span>
           </div>
         </div>
 

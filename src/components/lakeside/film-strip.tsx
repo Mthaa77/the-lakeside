@@ -16,6 +16,8 @@ type CuratedImage = {
   category: string;
   use: string[];
   alt: string;
+  w: number;
+  h: number;
   aspect: number;
 };
 
@@ -32,6 +34,8 @@ function Frame({ item, priority }: { item: CuratedImage; priority?: boolean }) {
       <img
         src={`/img/${item.key}-s.webp`}
         alt={item.alt}
+        width={item.w}
+        height={Math.round(item.w / item.aspect)}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
         draggable={false}
@@ -58,9 +62,21 @@ function MarqueeRow({
 }) {
   return (
     <div className="overflow-hidden">
-      <div className={dir === 'left' ? 'marquee-track marquee-track--left' : 'marquee-track marquee-track--right'} role="img" aria-label={label}>
+      {/* The track is focusable so keyboard visitors can pause the drift
+          (focus-within pause in globals.css); copy 1 is aria-hidden + inert. */}
+      <div
+        className={dir === 'left' ? 'marquee-track marquee-track--left' : 'marquee-track marquee-track--right'}
+        role="img"
+        aria-label={label}
+        tabIndex={0}
+      >
         {[0, 1].map((copy) => (
-          <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy === 1 || undefined}>
+          <div
+            key={copy}
+            className="flex shrink-0 gap-4 pr-4"
+            aria-hidden={copy === 1 || undefined}
+            inert={copy === 1 || undefined}
+          >
             {items.map((item, i) => (
               <Frame key={`${copy}-${item.key}`} item={item} priority={copy === 0 && i < 2} />
             ))}
@@ -85,7 +101,7 @@ export function FilmStrip() {
       {/* Slate header */}
       <div aria-hidden="true" className="mx-auto flex max-w-[1600px] items-center justify-between px-4 pb-4 pt-2 text-[10px] uppercase tracking-[0.3em] text-gold-200/70 sm:px-6">
         <span>Reel 02 · Snapshots</span>
-        <span className="hidden sm:inline">The Lakeside · Est. 1995</span>
+        <span className="hidden sm:inline">The Lakeside · Family-Run</span>
         <span className="flex items-center gap-1.5">
           <span className="wax-dot size-[7px]" />
           35mm

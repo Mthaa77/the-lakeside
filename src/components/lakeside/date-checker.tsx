@@ -508,6 +508,7 @@ function DayCell({
   const [y, m, d] = iso.split('-').map(Number);
   const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
   const isPast = today !== '' && iso < today;
+  const isToday = today !== '' && iso === today;
   const stateLabel =
     state === 'unknown'
       ? 'ask us'
@@ -523,7 +524,7 @@ function DayCell({
       onClick={() => onSelect(iso)}
       disabled={isPast}
       aria-pressed={selected}
-      aria-label={`${DAY_NAMES_FULL[dow]} ${d} ${MONTH_NAMES[m - 1]} ${y} — ${stateLabel}${note ? `: ${note}` : ''}`}
+      aria-label={`${DAY_NAMES_FULL[dow]} ${d} ${MONTH_NAMES[m - 1]} ${y}${isToday ? ' — today' : ''} — ${stateLabel}${note ? `: ${note}` : ''}`}
       title={note ?? (state === 'unknown' ? 'Ask us' : stateLabel)}
       className={cn(
         'relative flex size-11 items-center justify-center rounded-[4px] border text-sm transition-colors',
@@ -531,6 +532,8 @@ function DayCell({
           ? 'border-brass-500 bg-pine-900 font-semibold text-marble-50'
           : 'border-transparent text-pine-900 hover:border-brass-500/50 hover:bg-marble-100',
         state === 'booked' && !selected && 'text-ink-600/40 line-through',
+        // Today's date state, clearly: a brass ring no other day wears.
+        isToday && !selected && 'border-brass-500/70 bg-brass-500/10 font-semibold text-pine-900',
         isPast && 'cursor-not-allowed opacity-30 hover:border-transparent hover:bg-transparent',
       )}
     >
@@ -542,6 +545,11 @@ function DayCell({
           selected ? 'bg-brass-400' : DOT_STYLES[state],
         )}
       />
+      {isToday && (
+        <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-brass-500 px-1.5 text-[8px] font-bold uppercase tracking-[0.08em] text-pine-900">
+          Today
+        </span>
+      )}
     </button>
   );
 }

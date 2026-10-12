@@ -10,9 +10,10 @@ Everything below is intentionally **not invented** on the website. Until confirm
 - [ ] Confirm the sister venue "@amara_venue" (architecture is venue-switcher-ready; nothing built).
 
 ## Proof & reputation
-- [ ] Verify the live Google rating (4.8★ / ~390 reviews was a third-party snapshot). `SITE.rating.show` stays `false` until then; the badge auto-hides when `checkedAt` > 60 days old.
+- [x] ~~Verify the live Google rating~~ — verified by the 12 Oct 2026 review: 4.8★ / ~390 reviews. Badge is live and auto-hides when `checkedAt` (2026-10-12) is > 60 days old. **Re-check the live rating before launch and update `checkedAt`.**
+- [ ] Add the Google Business Profile URL in `SITE.rating.profileUrl` to make the rating badge clickable.
 - [ ] Which awards / years? (LS-003 awards image exists but is not published — contents unconfirmed.)
-- [ ] "Family-run since 1995" is taken from the logo ("EST. 1995") — confirm.
+- [x] ~~"Family-run since 1995"~~ — founding year NOT verified: removed everywhere (round 25). If the client later confirms a year, it can return deliberately.
 
 ## Pricing confirmations ("likely" items)
 - [ ] Service-provider fee (unseated suppliers) — likely R560 (2026) → R600 (2027).
@@ -24,13 +25,17 @@ Everything below is intentionally **not invented** on the website. Until confirm
 - [ ] Weekday packages for 110+ guests — site says "price on request" (current site says 100+).
 
 ## Content & media
-- [ ] Team page: consent + photos + bios for Penelope, Callie, Chef Jenna, Adam, Abi, Kaye (no team section published yet).
-- [ ] Chef Jenna portrait for the chef section (placeholder photo = reception scene).
+- [ ] **Hero photography: request original high-resolution files.** The current hero (LS-016) is the old site's ~1250px banner; a hero-grade replacement should be ≥ 2400px wide. The hero now sits in a framed, non-full-bleed mat as mitigation. (`scripts/inspect-images.ts` audits `/public/img`.)
+- [ ] Confirm the giraffe photo (LS-055) origin — giraffes are not on the venue wildlife list; alt text was reworded to name no animal. Retire the image if it was not shot on the estate.
+- [ ] Confirm whether Food Experiences are open to public RSVP before booking (list form assumes they are announce-only).
+- [ ] Launch: switch `SITE.url` back to https://thelakeside.co.za, flip robots to index/follow, remove the Carter Digitals demo strip + footer line (`demo-strip.tsx`, footer legal bar).
+- [ ] Team page: consent + photos + bios for Penelope, Callie, Chef Jenna, Adam, Abi, Kaye (welcome section credits Penelope & Callie by name).
+- [ ] Chef Jenna portrait for the chef section (placeholder photo = plated course).
 - [ ] Chapel ceremony capacity (NOT displayed anywhere — planner only enforces the 160/200 reception rule).
 - [ ] Real weddings: consent + case-study content + supplier credits (gallery captions credit "venue photographers — TODO(CLIENT)").
 - [ ] Photographer credits for each gallery image (manifest filenames only).
-- [ ] Menu content + Food Experience dates/price (tastings shown as concept only).
-- [ ] 30–45s golden-hour hero film (site uses the still + water shimmer).
+- [ ] Menu content + Food Experience dates/price (list form shown as concept only).
+- [ ] 30–45s golden-hour hero film (a 10s AI-generated placeholder loop plays; a real cinematic film replaces it).
 - [ ] Licensed lake-ambience audio loop (feature not enabled).
 - [ ] GLB/photogrammetry estate model + 360 tour (Matterport/Kuula) if desired.
 - [ ] Confirm drive times from Pretoria CBD / Menlyn / Johannesburg / OR Tambo.

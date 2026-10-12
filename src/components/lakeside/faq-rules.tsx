@@ -18,7 +18,7 @@ import {
 
 const RULES = [
   { icon: Flower2, t: 'In-house florals, decor & food', d: 'Our own team handles all three — no external suppliers in these categories.' },
-  { icon: CloudRainWind, t: 'Bubbles instead of confetti', d: 'Paper confetti and streamers are banned. Bubbles, petals and leaves are welcome.' },
+  { icon: CloudRainWind, t: 'Bubbles instead of confetti', d: 'Paper confetti and streamers are not allowed. Bubbles are the alternative.' },
   { icon: Music4, t: 'SAMPRA-registered DJ only', d: 'The venue sound system is compulsory; live bands finish by 22h00.' },
   { icon: VolumeX, t: 'Music curfew 22h00', d: 'At legal decibels from 22h00. The canapé area stays open after closing, without music.' },
   { icon: Wine, t: 'No outside alcohol', d: 'A R 2 000 fine applies. Corkage is possible only for bottles we cannot source.' },

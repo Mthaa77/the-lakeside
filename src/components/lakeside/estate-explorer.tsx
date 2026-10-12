@@ -1053,6 +1053,8 @@ export default function EstateExplorer() {
                         <img
                           src={`/img/${key}-s.webp`}
                           alt={img?.alt ?? key}
+                          width={img?.w}
+                          height={img?.h}
                           loading="lazy"
                           decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none"

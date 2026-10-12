@@ -3,7 +3,7 @@
 /**
  * THE LAKESIDE — LOGOMARK (round 23)
  * A resolution-independent typographic lockup that mirrors the venue's
- * brand block — THE / LAKESIDE / EST. 1995 / WEDDINGS & EVENTS — without
+ * brand block — THE / LAKESIDE / FAMILY-RUN / WEDDINGS & EVENTS — without
  * the white raster chip, so it sits cleanly on any surface.
  *
  * Scaling: set a font-size on the wrapper (e.g. text-[8px]); every internal
@@ -26,7 +26,7 @@ export function LogoMark({
   return (
     <span
       role="img"
-      aria-label="The Lakeside — Weddings & Events, est. 1995"
+      aria-label="The Lakeside — Weddings & Events, family-run"
       className={cn('block select-none text-center leading-none', className)}
     >
       {/* THE */}
@@ -51,7 +51,7 @@ export function LogoMark({
         Lakeside
       </span>
 
-      {/* — EST. 1995 — */}
+      {/* — FAMILY-RUN — */}
       <span aria-hidden="true" className="mt-[0.5em] flex items-center justify-center gap-[0.7em]">
         <span className={cn('h-px w-[2.6em]', dark ? 'bg-gold-300/45' : 'bg-brass-500/45')} />
         <span
@@ -60,7 +60,7 @@ export function LogoMark({
             dark ? 'text-gold-300/85' : 'text-brass-600',
           )}
         >
-          Est. 1995
+          Family-Run
         </span>
         <span className={cn('h-px w-[2.6em]', dark ? 'bg-gold-300/45' : 'bg-brass-500/45')} />
       </span>

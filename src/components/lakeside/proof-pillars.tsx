@@ -14,7 +14,7 @@ import { Reveal } from './reveal';
 import { ArrowRight, ShieldCheck, Users, Zap, Heart } from 'lucide-react';
 
 const PROOF = [
-  { icon: Heart, label: 'Family-run since 1995' },
+  { icon: Heart, label: 'Family-run' },
   { icon: Users, label: 'Exclusive use of the entire estate' },
   { icon: Zap, label: 'Backup generator that starts itself' },
   { icon: ShieldCheck, label: 'One coordinator, 08h00 to 22h00' },
@@ -27,6 +27,8 @@ const PILLARS = [
     title: 'Married inside a window.',
     line: 'Floor-to-ceiling glass among the pines and lemon trees — stacking doors that open to the summer breeze, warm and closed against the winter chill.',
     img: '/img/LS-067.webp',
+    w: 2048,
+    h: 1366,
     alt: 'The Glass Chapel exterior: floor-to-ceiling glass doors open onto the lawn, a couple on the steps',
     href: '#explore',
     focus: 'chapel',
@@ -37,6 +39,8 @@ const PILLARS = [
     title: 'Dinner on the water&rsquo;s edge.',
     line: 'Polished marble under scissor trusses and brass chandeliers, a deck over the lake, and a lounge with a fireplace for the quiet hours.',
     img: '/img/LS-071.webp',
+    w: 1073,
+    h: 1600,
     alt: 'The White Marble Reception: polished marble floor, scissor trusses, brass chandeliers and glass walls over the water',
     href: '#explore',
     focus: 'reception',
@@ -48,6 +52,8 @@ const PILLARS = [
     title: 'Zebra on the horizon.',
     line: 'Zebra, sable, gemsbok, waterbuck, golden wildebeest and emus share the lawns. Guests love it; glass stays inside.',
     img: '/img/LS-061.webp',
+    w: 1600,
+    h: 1066,
     alt: 'Bride and groom watching zebra graze beside the lawn',
     href: '#explore',
     focus: 'wildlife',
@@ -74,7 +80,10 @@ function PillarImage({ p, index }: { p: (typeof PILLARS)[number]; index: number 
         <img
           src={p.img}
           alt={p.alt}
+          width={p.w}
+          height={p.h}
           loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
       </motion.div>

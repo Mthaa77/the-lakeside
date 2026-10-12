@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import { PRICING, PACKAGE_INCLUSIONS } from '@/config/pricing';
 import { formatZAR } from '@/lib/pricing-engine';
+import { WA_LINK } from '@/config/site';
 import { Reveal } from './reveal';
 import { CornerMarks, FloralSprig } from './ornaments';
 import { Button } from '@/components/ui/button';
@@ -18,9 +19,12 @@ import {
 } from 'lucide-react';
 
 /**
- * Food Experience waitlist — honest by design: tastings run every 3–4 months
- * and dates are only announced to the list. No invented dates, no seats-left
- * counters. Captures a lead via /api/leads (source: food_experience_waitlist).
+ * Food Experience list — honest by design: a Food Experience for two is
+ * included with every booking, and events run every 3–4 months. No invented
+ * dates, no seats-left counters. Captures a lead via /api/leads
+ * (source: food_experience_waitlist).
+ * TODO(CLIENT): confirm whether Food Experiences are open to public RSVP
+ * before booking — the form copy assumes they are not yet bookable events.
  */
 function TastingWaitlist() {
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
@@ -40,7 +44,7 @@ function TastingWaitlist() {
           firstName: String(fd.get('firstName') ?? ''),
           email: String(fd.get('email') ?? ''),
           source: 'food_experience_waitlist',
-          message: 'Food Experience waitlist — invite us to the next tasting',
+          message: 'Food Experience list — hear about the next event',
           consentContact: true,
           consentMarketing: fd.get('consentMarketing') === 'on',
         }),
@@ -79,10 +83,10 @@ function TastingWaitlist() {
           </span>
         </span>
         <div>
-          <p className="text-sm font-semibold text-marble-50">Join the tasting list</p>
+          <p className="text-sm font-semibold text-marble-50">Hear about the next Food Experience</p>
           <p className="mt-1 text-xs leading-relaxed text-marble-50/70">
-            Food Experiences run every 3&ndash;4 months and dates open to the list first. No spam —
-            one email when the next date opens.
+            A Food Experience for two is included with your booking, and events run every
+            3&ndash;4 months. One email when the next date opens — no spam.
           </p>
         </div>
       </div>
@@ -136,11 +140,11 @@ function TastingWaitlist() {
   );
 }
 
-// Chef fact rows — copy preserved; icons give each promise its own medallion.
+// Chef fact rows — verified facts only; icons give each promise its own medallion.
 const CHEF_FACTS = [
   { icon: UtensilsCrossed, text: '4 courses on weekends; 3 plated courses on weekday packages' },
   { icon: BadgeCheck, text: 'Halaal-certified meat at no extra cost; kosher available (surcharge)' },
-  { icon: Wine, text: 'Taste before you book — Food Experience events run every 3–4 months' },
+  { icon: Wine, text: 'A Food Experience for two is included with your booking. Experiences run every 3 to 4 months' },
 ];
 
 export function ChefAccommodation() {
@@ -164,6 +168,9 @@ export function ChefAccommodation() {
                     src="/img/LS-039.webp"
                     alt="A plated course from The Lakeside kitchen"
                     loading="lazy"
+                    decoding="async"
+                    width={1073}
+                    height={1600}
                     className="aspect-[4/5] w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-pine-950/70 via-pine-950/10 to-transparent" />
@@ -171,14 +178,15 @@ export function ChefAccommodation() {
                 <CornerMarks inset="14px" tone="gold" />
               </div>
               {/* TODO(CLIENT): Chef Jenna portrait + consent */}
-              {/* Floating name / quote plaque overlapping the frame */}
+              {/* Title plaque — "Lady of Delectable Delights" is Chef Jenna's
+                  title from the brochure, rendered as a title, not a quote. */}
               <figure className="glass-card absolute -bottom-6 left-1/2 w-[min(86%,20rem)] -translate-x-1/2 rounded-[6px] px-5 py-4 text-center sm:left-auto sm:right-[-1.25rem] sm:w-60 sm:translate-x-0">
                 <FloralSprig className="mx-auto h-5 w-auto text-gold-300" />
-                <blockquote className="mt-2 font-display text-lg italic leading-snug text-gold-300">
-                  &ldquo;Lady of Delectable Delights&rdquo;
-                </blockquote>
-                <figcaption className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-marble-50/70">
+                <p className="mt-2 font-display text-lg leading-snug text-gold-300">
                   Chef Jenna
+                </p>
+                <figcaption className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-marble-50/70">
+                  Lady of Delectable Delights
                 </figcaption>
               </figure>
             </div>
@@ -214,7 +222,7 @@ export function ChefAccommodation() {
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild className="btn-shine gold-surface h-11 rounded-full px-6 text-sm font-semibold tracking-wide">
-                <a href="#tasting">Reserve a seat at the next tasting <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" /></a>
+                <a href="#tasting">Hear about the next Food Experience <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" /></a>
               </Button>
             </div>
             <TastingWaitlist />
@@ -282,9 +290,9 @@ export function ChefAccommodation() {
 
             <div className="grid gap-4 sm:grid-cols-3 sm:gap-5 lg:col-span-8">
               {[
-                { img: '/img/LS-072.webp', alt: 'The thatched manor interior: chandeliers, spiral stair and fireplace', label: 'Manor House' },
-                { img: '/img/LS-032.webp', alt: 'Heritage House bedroom', label: 'Heritage House' },
-                { img: '/img/LS-028.webp', alt: 'The Bridal Suite lounge', label: 'Bridal Suite' },
+                { img: '/img/LS-072.webp', w: 1600, h: 1083, alt: 'The thatched manor interior: chandeliers, spiral stair and fireplace', label: 'Manor House' },
+                { img: '/img/LS-032.webp', w: 1600, h: 1067, alt: 'Heritage House bedroom', label: 'Heritage House' },
+                { img: '/img/LS-028.webp', w: 773, h: 1010, alt: 'The Bridal Suite lounge', label: 'Bridal Suite' },
               ].map((room, i) => (
                 <Reveal key={room.label} delay={i * 90}>
                   <figure className="group relative overflow-hidden rounded-[6px] shadow-[0_24px_60px_-30px_rgba(16,38,30,0.4)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_36px_72px_-30px_rgba(16,38,30,0.55)] hover:ring-1 hover:ring-brass-500/60">
@@ -292,6 +300,9 @@ export function ChefAccommodation() {
                       src={room.img}
                       alt={room.alt}
                       loading="lazy"
+                      decoding="async"
+                      width={room.w}
+                      height={room.h}
                       className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
                     />
                     {/* Bottom scrim + full-width label bar: never clipped */}
@@ -364,7 +375,7 @@ export function ChefAccommodation() {
                   <h3 className="mt-4 font-display text-xl text-pine-900">{card.title}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-600">{card.line}</p>
                   <a
-                    href={`https://wa.me/27679621014?text=${encodeURIComponent(card.wa)}`}
+                    href={WA_LINK(card.wa)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-pine-900 underline decoration-brass-500 decoration-2 underline-offset-4 hover:text-brass-600"

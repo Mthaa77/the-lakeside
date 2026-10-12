@@ -12,6 +12,11 @@
  * visitor prefers reduced motion or if autoplay is blocked. The film is
  * armed only after the page's `load` event so it never races the poster.
  *
+ * Round 25 (demo QA): the founding year is gone (never verified) — the
+ * lockup now says FAMILY-RUN; the backdrop sits inside the gilded frame as
+ * a true mat (the source photo is 1251px — see TODO below), and the trust
+ * row carries the verified Google rating.
+ *
  * Everything round 21 established still holds:
  *  - no scroll-linked animation; time-based cinema only,
  *  - gilded inset frame, rings ornament, circular seal, film grain,
@@ -31,6 +36,7 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { PRICING } from '@/config/pricing';
 import { CircularSeal, CornerMarks, Rings } from './ornaments';
+import { RatingBadge } from './rating-badge';
 
 /** Hero reel frames — 01 stays first for LCP; the rest load at low priority. */
 const FRAMES = [
@@ -38,16 +44,22 @@ const FRAMES = [
     src: '/img/LS-016.webp',
     alt: 'The Lakeside estate at dusk: the glass chapel and the white gabled reception pavilion reflected in the still lake',
     slate: '01 · Dusk on the lake',
+    w: 1251,
+    h: 844,
   },
   {
     src: '/img/LS-067.webp',
     alt: '',
     slate: '02 · Under the glass',
+    w: 2048,
+    h: 1366,
   },
   {
     src: '/img/LS-073.webp',
     alt: '',
     slate: '03 · Golden hour',
+    w: 1600,
+    h: 1067,
   },
 ] as const;
 
@@ -242,13 +254,20 @@ export function Hero() {
         barsOpen && 'cine-bars-open'
       )}
     >
-      {/* ── Backdrop: the estate in motion, reel as the still fallback ──── */}
-      <div className="absolute inset-0">
+      {/* ── Backdrop: the estate in motion, reel as the still fallback ────
+          Framed, non-full-bleed: the media lives inside the gilded frame as
+          a mat. The poster is the old site's 1251px banner — kept off the
+          section edges it never has to fake full-bleed sharpness.
+          TODO(CLIENT): request original high-resolution photography (hero
+          replacement should be ≥ 2400px wide; see docs/TODO-CLIENT.md). */}
+      <div className="absolute inset-3 overflow-hidden rounded-[2px] sm:inset-5">
         {FRAMES.map((f, i) => (
           <img
             key={f.src}
             src={f.src}
             alt={f.alt}
+            width={f.w}
+            height={f.h}
             fetchPriority={i === 0 ? 'high' : 'low'}
             className={cn(
               'cine-frame h-full w-full object-cover',
@@ -290,8 +309,9 @@ export function Hero() {
           aria-hidden="true"
           className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-pine-950/55 to-transparent"
         />
+        {/* Lens vignette lives inside the mat so the frame edge stays clean */}
+        <div className="cine-vignette" aria-hidden="true" />
       </div>
-      <div className="cine-vignette" aria-hidden="true" />
       <div className="cine-grain cine-grain--live" aria-hidden="true" />
 
       {/* Ambient gold + ruby light (decorative) */}
@@ -363,7 +383,7 @@ export function Hero() {
         aria-hidden="true"
         className="absolute bottom-24 right-10 z-10 hidden xl:block"
       >
-        <CircularSeal text="The Lakeside · Weddings · Est. 1995 · " theme="dark" />
+        <CircularSeal text="The Lakeside · Weddings · Family-Run · " theme="dark" />
       </div>
 
       {/* Scroll cue — invites the first scroll, hides once the page moves */}
@@ -401,7 +421,7 @@ export function Hero() {
             <span className="wax-dot size-[5px]" aria-hidden="true" />
             <span>Pretoria East</span>
             <span className="wax-dot size-[5px]" aria-hidden="true" />
-            <span>Est. 1995</span>
+            <span>Family-Run</span>
           </p>
 
           {/* The headline — three quiet sentences, the last in gold italic */}
@@ -419,8 +439,9 @@ export function Hero() {
           {/* Lede */}
           <p className="reveal mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-marble-50/85 sm:text-lg [transition-delay:320ms]">
             A family-run estate on the water&rsquo;s edge — marble underfoot,
-            chandeliers overhead, zebra grazing beyond the lawn. Thirty years
-            of days done beautifully, and every price in the open.
+            chandeliers overhead, zebra grazing beyond the lawn. Every price in
+            the open, and a team that stays beside you from first viewing to
+            last dance.
           </p>
 
           {/* CTAs */}
@@ -440,8 +461,11 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Trust meta — hairline-separated, no confetti */}
+          {/* Trust meta — hairline-separated, no confetti; verified Google
+              rating rides along and hides itself when the check goes stale */}
           <div className="reveal mt-6 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-[13px] font-medium tracking-wide text-marble-50/75 [transition-delay:540ms]">
+            <RatingBadge tone="dark" />
+            <span className="h-3.5 w-px bg-white/25" aria-hidden="true" />
             <span className="inline-flex items-center gap-2">
               <Users className="h-3.5 w-3.5 text-gold-300" aria-hidden="true" />
               Up to {PRICING.capacity.max} guests
@@ -449,12 +473,16 @@ export function Hero() {
             <span className="h-3.5 w-px bg-white/25" aria-hidden="true" />
             <span className="inline-flex items-center gap-2">
               <span className="wax-dot size-[5px]" aria-hidden="true" />
-              Family-run since 1995
+              Family-run
             </span>
             <span className="h-3.5 w-px bg-white/25" aria-hidden="true" />
             <span className="inline-flex items-center gap-2">
               <CalendarDays className="h-3.5 w-3.5 text-gold-300" aria-hidden="true" />
-              Saturdays from R{thin(PRICING.venueHire.sat)} hire
+              Saturday venue hire R{thin(PRICING.venueHire.sat)}
+            </span>
+            <span className="h-3.5 w-px bg-white/25" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2">
+              Venue hire from R{thin(PRICING.venueHire.monThu)} (Mon to Thu)
             </span>
           </div>
         </div>

@@ -57,7 +57,7 @@ export function WeddingsPricing() {
       <section id="pricing" aria-label="Open pricing" className="relative overflow-hidden bg-pine-900 text-marble-50">
         <div className="absolute inset-0 opacity-[0.14]" aria-hidden="true">
           { }
-          <img src="/img/LS-016.webp" alt="" className="h-full w-full object-cover" loading="lazy" />
+          <img src="/img/LS-016.webp" alt="" width={1251} height={844} className="h-full w-full object-cover" loading="lazy" decoding="async" aria-hidden="true" />
         </div>
         <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-12">
@@ -76,6 +76,10 @@ export function WeddingsPricing() {
                 <div className="flex items-baseline justify-between gap-4">
                   <dt className="text-sm text-marble-50/80">Saturday venue hire</dt>
                   <dd className="font-display text-2xl text-brass-400 tabular">{formatZAR(PRICING.venueHire.sat)}</dd>
+                </div>
+                <div className="flex items-baseline justify-between gap-4">
+                  <dt className="text-sm text-marble-50/80">Venue hire from (Mon to Thu)</dt>
+                  <dd className="font-display text-2xl text-brass-400 tabular">{formatZAR(PRICING.venueHire.monThu)}</dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-4">
                   <dt className="text-sm text-marble-50/80">Food &amp; decor per guest ({rateYear})</dt>

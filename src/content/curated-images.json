@@ -1,5 +1,5 @@
 [
-  { "key": "LS-001", "category": "brand", "use": ["logo"], "alt": "The Lakeside — Weddings & Events, est. 1995", "w": 417, "h": 98, "aspect": 4.26, "orientation": "panorama" },
+  { "key": "LS-001", "category": "brand", "use": ["logo"], "alt": "The Lakeside — Weddings & Events", "w": 417, "h": 98, "aspect": 4.26, "orientation": "panorama" },
   { "key": "LS-016", "category": "lakeside", "use": ["hero", "3d", "thumb"], "alt": "The Lakeside estate at dusk: the glass chapel and white gabled reception pavilion reflected in the still lake", "w": 1251, "h": 844, "aspect": 1.48, "orientation": "landscape" },
   { "key": "LS-067", "category": "chapel", "use": ["hero", "3d", "thumb"], "alt": "The Glass Chapel exterior: floor-to-ceiling glass doors open onto the lawn, a couple on the steps", "w": 2048, "h": 1366, "aspect": 1.5, "orientation": "landscape" },
   { "key": "LS-071", "category": "reception", "use": ["hero", "3d", "thumb"], "alt": "The White Marble Reception: polished marble floor, scissor trusses, brass chandeliers and glass walls over the water", "w": 1073, "h": 1600, "aspect": 0.67, "orientation": "portrait" },
@@ -7,7 +7,7 @@
   { "key": "LS-050", "category": "real-wedding", "use": ["3d", "thumb"], "alt": "A confetti of white petals as the couple exit the glass chapel", "w": 1600, "h": 1067, "aspect": 1.5, "orientation": "landscape" },
   { "key": "LS-063", "category": "wildlife", "use": ["3d", "thumb"], "alt": "A sable antelope at the water's edge on the estate", "w": 1600, "h": 1067, "aspect": 1.5, "orientation": "landscape" },
   { "key": "LS-081", "category": "real-wedding", "use": ["3d", "thumb"], "alt": "A couple on the lawns, the bride's dress sweeping across the grass", "w": 1600, "h": 1067, "aspect": 1.5, "orientation": "landscape" },
-  { "key": "LS-055", "category": "wildlife", "use": ["3d", "thumb"], "alt": "Golden-hour portrait on the grassland with a giraffe behind", "w": 1074, "h": 1288, "aspect": 0.83, "orientation": "portrait" },
+  { "key": "LS-055", "category": "wildlife", "use": ["3d", "thumb"], "alt": "Golden-hour portrait of a couple on the open grassland", "w": 1074, "h": 1288, "aspect": 0.83, "orientation": "portrait" },
   { "key": "LS-054", "category": "lakeside", "use": ["3d", "thumb"], "alt": "Guests strolling the brick walkway between the lemon trees", "w": 495, "h": 742, "aspect": 0.67, "orientation": "portrait" },
   { "key": "LS-072", "category": "accommodation", "use": ["3d", "thumb"], "alt": "The thatched manor interior: chandeliers, spiral stair and fireplace", "w": 1600, "h": 1083, "aspect": 1.48, "orientation": "landscape" },
   { "key": "LS-026", "category": "suites", "use": ["3d", "thumb"], "alt": "The Beauty Room: arched mirrors and brass wall lights at the styling stations", "w": 529, "h": 789, "aspect": 0.67, "orientation": "portrait" },

@@ -602,7 +602,7 @@ html {
   background-repeat: repeat-x;
 }
 
-/* Slow rotation for the circular "est. 1995" seal text */
+/* Slow rotation for the circular "family-run" seal text */
 @keyframes seal-spin {
   to { transform: rotate(360deg); }
 }
@@ -629,6 +629,12 @@ html {
   .marquee-track--right { animation: marquee-right 74s linear infinite; }
   .film-strip:hover .marquee-track--left,
   .film-strip:hover .marquee-track--right { animation-play-state: paused; }
+  /* Keyboard parity: focus on the track (or any frame inside it) pauses
+     the drift, mirroring hover. */
+  .marquee-track--left:focus,
+  .marquee-track--right:focus,
+  .marquee-track--left:focus-within,
+  .marquee-track--right:focus-within { animation-play-state: paused; }
 }
 @media (prefers-reduced-motion: reduce) {
   .marquee-track--left, .marquee-track--right { transform: none; }

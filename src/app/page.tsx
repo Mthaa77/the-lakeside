@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { SITE } from '@/config/site';
 import { PRICING } from '@/config/pricing';
 import { FAQS } from '@/content/faqs';
@@ -7,7 +8,6 @@ import { Welcome } from '@/components/lakeside/welcome';
 import { FilmStrip } from '@/components/lakeside/film-strip';
 import { ProofPillars } from '@/components/lakeside/proof-pillars';
 import { WeddingsPricing } from '@/components/lakeside/weddings-pricing';
-import GalleryCarousel from '@/components/lakeside/gallery-carousel';
 import EstateExplorer from '@/components/lakeside/estate-explorer';
 import { ChefAccommodation } from '@/components/lakeside/stories';
 import { FaqRules } from '@/components/lakeside/faq-rules';
@@ -27,6 +27,10 @@ import { CinematicInterlude } from '@/components/lakeside/cinematic-interlude';
 import { FloatingDock, MobileDock } from '@/components/lakeside/floating-dock';
 import { OrnamentDivider, Rings } from '@/components/lakeside/ornaments';
 import { ArrowRight } from 'lucide-react';
+
+// The 3D salon carousel ships as its own chunk — the WebGL/transform code
+// never blocks the main bundle (falls back to a classic grid internally).
+const GalleryCarousel = dynamic(() => import('@/components/lakeside/gallery-carousel'));
 
 function structuredData() {
   const year = new Date().getFullYear() >= 2027 ? 2027 : 2026;
@@ -85,10 +89,12 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-marble-50">
       <a
         href="#pricing"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-pine-900 focus:px-5 focus:py-2.5 focus:text-marble-50"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-pine-900 focus:px-5 focus:py-2.5 focus:text-marble-50"
       >
         Skip to pricing
       </a>
+
+      {/* Concept-demo disclosure lives in the fixed header (DemoStrip) */}
 
       <Header />
 
@@ -204,6 +210,8 @@ export default function Home() {
             aria-hidden="true"
             loading="lazy"
             decoding="async"
+            width={1073}
+            height={1600}
             className="absolute inset-0 h-full w-full object-cover object-[50%_28%] opacity-35"
           />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-pine-900 via-pine-900/85 to-pine-900/35" />

@@ -148,6 +148,8 @@ function SalonFrame({
           ref={imgRef}
           src={imgSrc(item.key)}
           alt={item.alt}
+          width={item.w}
+          height={item.h}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           draggable={false}
@@ -801,6 +803,8 @@ export default function GalleryCarousel() {
                   <img
                     src={imgSrc(g.key)}
                     alt={g.alt}
+                    width={g.w}
+                    height={g.h}
                     loading="lazy"
                     decoding="async"
                     draggable={false}
@@ -840,6 +844,8 @@ export default function GalleryCarousel() {
               <img
                 src={imgSrc(lbItem.key, false)}
                 alt={lbItem.alt}
+                width={lbItem.w}
+                height={lbItem.h}
                 decoding="async"
                 className="mx-auto max-h-[66vh] w-auto max-w-full rounded-lg object-contain"
               />

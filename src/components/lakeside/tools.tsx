@@ -11,7 +11,7 @@
  *    — markup/styling only, all state/pricing/field ids unchanged.
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { PRICING } from '@/config/pricing';
 import { formatZAR, classifyDate, weekdayEligible, estimateWeekday, estimateWeekendCard } from '@/lib/pricing-engine';
 import { WA_LINK } from '@/config/site';
@@ -42,8 +42,33 @@ type Col = {
 };
 
 export function PackageComparator() {
+  // SSR renders a valid, always-eligible Thursday so the cards are complete
+  // in the first paint; after mount the comparator re-defaults to the NEXT
+  // eligible Thursday from today and says so (hydration-safe — no empty or
+  // garbage states, and the swap happens below the fold).
   const [date, setDate] = useState('2027-03-11'); // a Thursday in 2027
+  const [autoPicked, setAutoPicked] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [today, setToday] = useState('');
   const [guests, setGuests] = useState(80);
+
+  useEffect(() => {
+    const t = new Date().toISOString().slice(0, 10);
+    setToday(t);
+    // Next eligible Thursday: strictly after today, skipping December and
+    // public holidays (the weekday package's own eligibility rules).
+    const d = new Date(`${t}T00:00:00Z`);
+    for (let i = 0; i < 400; i++) {
+      d.setUTCDate(d.getUTCDate() + 1);
+      const iso = d.toISOString().slice(0, 10);
+      if (d.getUTCDay() === 4 && weekdayEligible(classifyDate(iso))) {
+        setDate(iso);
+        setAutoPicked(true);
+        break;
+      }
+    }
+    setMounted(true);
+  }, []);
 
   const cols = useMemo<Col[]>(() => {
     const c = classifyDate(date);
@@ -88,6 +113,16 @@ export function PackageComparator() {
     ];
   }, [date, guests]);
 
+  // "Assumes Thursday 4 March 2027" — UTC-anchored so server and client agree.
+  const assumeLabel = useMemo(() => {
+    if (!date) return '';
+    const [y, m, d] = date.split('-').map(Number);
+    const dow = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
+    const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return `${DAYS[dow]} ${d} ${MONTHS[m - 1]} ${y}`;
+  }, [date]);
+
   return (
     <Reveal>
       <div className="rounded-[6px] border border-marble-200 bg-white p-6 shadow-[0_24px_70px_-38px_rgba(16,38,30,0.35)] sm:p-8">
@@ -102,10 +137,13 @@ export function PackageComparator() {
               <input
                 id="cmp-date"
                 type="date"
-                min="2026-10-10"
+                min={mounted && today ? today : '2026-10-12'}
                 max="2027-12-31"
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => {
+                  setDate(e.target.value);
+                  setAutoPicked(false);
+                }}
                 className="h-10 rounded-[4px] border border-marble-200 bg-marble-50 px-3 text-sm text-pine-900 [color-scheme:light]"
               />
             </div>
@@ -182,6 +220,16 @@ export function PackageComparator() {
             </article>
           ))}
         </div>
+        <p aria-live="polite" className="mt-4 text-center text-xs leading-relaxed text-ink-600">
+          {assumeLabel ? (
+            <>
+              Assumes <strong className="font-semibold text-pine-900">{assumeLabel}</strong>
+              {autoPicked && ' — the next available Thursday'}. Change the date or guest count above and both cards re-price instantly.
+            </>
+          ) : (
+            'Assumes the next available Thursday — pick your own date above.'
+          )}
+        </p>
         <p className="mt-4 text-xs leading-relaxed text-ink-600">
           Thursdays price both ways — the weekend rate card and the weekday all-inclusive. Florals are in-house only on every
           package; accommodation is quoted separately in the estimator.

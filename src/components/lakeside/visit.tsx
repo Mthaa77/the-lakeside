@@ -307,7 +307,7 @@ export function Visit() {
     <section id="visit" aria-label="Visit The Lakeside" className="relative overflow-hidden bg-pine-900 text-marble-50">
       <div className="absolute inset-0 opacity-20" aria-hidden="true">
         { }
-        <img src="/img/LS-082.webp" alt="" loading="lazy" className="h-full w-full object-cover" />
+        <img src="/img/LS-082.webp" alt="" width={1600} height={1067} loading="lazy" decoding="async" className="h-full w-full object-cover" />
       </div>
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-12">

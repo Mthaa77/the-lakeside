@@ -1,11 +1,13 @@
 'use client';
 
 /**
- * THE LAKESIDE — WELCOME (round 18, new)
+ * THE LAKESIDE — WELCOME (round 25, demo-QA rewrite)
  * A premium marble "receiving room" directly under the hero: family welcome
  * copy with a drop cap and signature, a drifting collage of estate photos in
- * gilded frames, floating Est-1995 seal, and a gold-numeral stats row.
- * Ambient gold + ruby blooms keep the round-18 palette present without noise.
+ * gilded frames, a floating family-run seal, and a verified-facts stats row.
+ * Every claim below is on the client's verified-facts list — no founding
+ * year, no invented history.
+ * Ambient gold + ruby blooms keep the palette present without noise.
  */
 
 import { useRef } from 'react';
@@ -16,10 +18,10 @@ import { OrnamentDivider } from './ornaments';
 import { cn } from '@/lib/utils';
 
 const STATS = [
-  { n: '1995', label: 'Family-run since' },
-  { n: '200', label: 'Guests on the lawn' },
-  { n: '3', label: 'Ceremony spaces' },
-  { n: '1', label: 'Very still lake' },
+  { n: '200', label: 'Guests, up to' },
+  { n: '9', label: 'Rooms, up to 18 guests' },
+  { n: '14h', label: 'Coordinator, 08h00–22h00' },
+  { n: 'Auto', label: 'Backup generator' },
 ] as const;
 
 /** Small spinning gold seal — shared visual language with the hero. */
@@ -40,7 +42,7 @@ function MiniSeal({ className }: { className?: string }) {
             fontFamily: 'var(--font-body), sans-serif',
           }}
         >
-          <textPath href="#seal-mini-arc">Est. 1995 · Est. 1995 ·</textPath>
+          <textPath href="#seal-mini-arc">Family-Run · Family-Run ·</textPath>
         </text>
       </svg>
       <span className="wax-dot absolute left-1/2 top-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
@@ -75,8 +77,8 @@ export function Welcome() {
           <OrnamentDivider tone="brass" center="rings" className="mb-6" />
           <p className="eyebrow eyebrow-dash text-brass-600">Welcome to The Lakeside</p>
           <h2 className="mt-3 font-display text-4xl font-medium text-balance text-pine-900 sm:text-5xl">
-            Thirty years. One lake.{' '}
-            <em className="gold-gradient-text gold-gradient-text--deep gold-gradient-text--live">Your day.</em>
+            A family-run estate{' '}
+            <em className="gold-gradient-text gold-gradient-text--deep gold-gradient-text--live">on the water.</em>
           </h2>
         </Reveal>
 
@@ -86,29 +88,28 @@ export function Welcome() {
             <Reveal delay={80}>
               <p className="text-pretty text-base leading-relaxed text-ink-600 sm:text-lg">
                 <span className="font-display float-left mr-3 mt-1 text-6xl font-medium leading-[0.8] text-brass-600">
-                  S
+                  T
                 </span>
-                ince 1995 our family has flung open these gates for couples starting
-                their own. The kettle goes on in the Beauty Room, the zebras wander the
-                far lawn, and by golden hour the water turns to hammered brass.
+                he Lakeside is run by a small family team: Penelope and Callie,
+                Chef Jenna and the coordinators who stay with you from the first
+                viewing to the last dance.
               </p>
               <p className="mt-5 text-pretty text-base leading-relaxed text-ink-600">
-                Nothing here is hired in: the glass chapel was raised on its shore, the
-                marble floor was polished for first dances, and every member of the team
-                knows exactly which door catches the evening light. You arrive engaged —
-                you leave with a home.
+                Glass chapel, marble reception on the water, a century-old slate
+                house and zebra on the lawn — all yours for the day.
               </p>
             </Reveal>
 
-            {/* Signature */}
+            {/* Signature — named owners; team photo needs consent first.
+                TODO(CLIENT): team photos + written consent before adding portraits. */}
             <Reveal delay={160} className="mt-8 flex items-center gap-4">
               <span className="grid size-11 place-items-center rounded-full border border-brass-500/40 bg-white shadow-sm" aria-hidden="true">
                 <Heart className="h-4 w-4 text-ruby-500" />
               </span>
               <div>
-                <p className="font-display text-xl text-pine-900">The Lakeside family</p>
+                <p className="font-display text-xl text-pine-900">Penelope &amp; Callie</p>
                 <p className="text-xs uppercase tracking-[0.14em] text-ink-600">
-                  Keepers of the estate
+                  Owners, The Lakeside
                 </p>
               </div>
             </Reveal>
@@ -160,6 +161,8 @@ export function Welcome() {
                   alt="The Glass Chapel exterior: floor-to-ceiling glass doors open onto the lawn, a couple on the steps"
                   loading="lazy"
                   decoding="async"
+                  width={2048}
+                  height={1366}
                   className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
                 />
                 <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-pine-900/85 to-transparent px-4 pb-3 pt-10 text-[11px] uppercase tracking-[0.14em] text-gold-200">
@@ -168,16 +171,21 @@ export function Welcome() {
                 </figcaption>
               </motion.figure>
 
-              {/* Overlap top-right — golden hour with the giraffe */}
+              {/* Overlap top-right — golden hour on the lawns.
+                  Alt wording deliberately names no animal: giraffes are not
+                  on the venue's wildlife list. TODO(CLIENT): confirm where
+                  this photo was taken; if not on the estate, retire it. */}
               <motion.figure
                 style={reduced ? undefined : { y: sideY }}
                 className="absolute -top-8 right-0 hidden w-[36%] rotate-2 overflow-hidden rounded-[4px] border-2 border-white shadow-[0_24px_50px_-24px_rgba(16,38,30,0.6)] sm:block"
               >
                 <img
                   src="/img/LS-055-s.webp"
-                  alt="Golden-hour portrait on the grassland with a giraffe behind"
+                  alt="Golden-hour portrait of a couple on the open grassland"
                   loading="lazy"
                   decoding="async"
+                  width={1074}
+                  height={1288}
                   className="aspect-[4/5] w-full object-cover"
                 />
               </motion.figure>
@@ -192,6 +200,8 @@ export function Welcome() {
                   alt="A confetti of white petals as the couple exit the glass chapel"
                   loading="lazy"
                   decoding="async"
+                  width={1600}
+                  height={1067}
                   className="aspect-[4/3] w-full object-cover"
                 />
               </motion.figure>

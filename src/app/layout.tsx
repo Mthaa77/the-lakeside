@@ -34,13 +34,6 @@ export const metadata: Metadata = {
   },
   description:
     "A modern glass chapel, a marble reception on the water's edge and zebra grazing beyond your canapés. Family-run estate in Tiegerpoort, Pretoria East. Open pricing — see your estimate in under a minute.",
-  keywords: [
-    "wedding venue Pretoria East",
-    "glass chapel wedding Pretoria",
-    "weekday wedding Gauteng",
-    "wedding venue with accommodation Pretoria",
-    "wedding venue Tierpoort",
-  ],
   icons: {
     icon: [
       { url: "/brand/icon-32.png", sizes: "32x32", type: "image/png" },
@@ -59,7 +52,7 @@ export const metadata: Metadata = {
     locale: "en_ZA",
     images: [
       {
-        url: "/brand/og.jpg",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: "The Lakeside estate at dusk — the glass chapel and reception pavilion reflected in the lake",
@@ -71,9 +64,10 @@ export const metadata: Metadata = {
     title: "The Lakeside — Where Glass Meets Lake",
     description:
       "Glass chapel · marble reception on the water · wildlife on the lawns. Pretoria East.",
-    images: ["/brand/og.jpg"],
+    images: ["/og.jpg"],
   },
-  robots: { index: true, follow: true },
+  // Concept demo — keep every engine out until the client launches.
+  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
 };
 
 export const viewport: Viewport = {

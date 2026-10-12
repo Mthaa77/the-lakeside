@@ -10,10 +10,11 @@
  * clears the MobileDock. (Mobile bar became the MobileDock, r18.)
  */
 
-import { SITE } from '@/config/site';
+import { SITE, RATING_FRESH } from '@/config/site';
 import { Instagram, Facebook, MapPin, Phone, Mail, Clock, ArrowUp } from 'lucide-react';
 import { Rings } from './ornaments';
 import { LogoMark } from './logo';
+import { RatingBadge } from './rating-badge';
 
 const EXPLORE_LINKS = [
   { label: 'The estate', href: '#estate' },
@@ -56,7 +57,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 }
 
 export function Footer() {
-  const ratingFresh = SITE.rating.show; // hidden until the client verifies the live rating
+  const ratingFresh = RATING_FRESH; // show + checked within 60 days — stale proof hides itself
 
   return (
     <footer className="relative bg-pine-950 text-marble-50">
@@ -101,9 +102,9 @@ export function Footer() {
               })}
             </div>
             {ratingFresh && (
-              <p className="mt-5 text-xs text-marble-50/55">
-                {SITE.rating.value} on {SITE.rating.source} · {SITE.rating.count} reviews · checked {SITE.rating.checkedAt}
-              </p>
+              <div className="mt-5">
+                <RatingBadge tone="dark" />
+              </div>
             )}
           </div>
 
@@ -173,6 +174,10 @@ export function Footer() {
             </a>
           </p>
         </div>
+        <p className="mt-4 border-t border-white/[0.06] pt-4 text-center text-[10.5px] leading-relaxed text-marble-50/40">
+          Concept demo prepared by Carter Digitals. Not the official The Lakeside website.
+          Prices and details to be confirmed by The Lakeside.
+        </p>
       </div>
     </footer>
   );

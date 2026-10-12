@@ -40,7 +40,10 @@ export function CinematicInterlude() {
           <img
             src="/img/LS-007.webp"
             alt="The glass chapel and the white pavilion mirrored in the still lake at golden hour, a couple on the lawn"
+            width={1920}
+            height={1280}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         </motion.div>
