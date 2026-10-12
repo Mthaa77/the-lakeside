@@ -12,7 +12,7 @@
  *   localStorage 'lakeside-consent' = 'device-only-v1'
  *   CustomEvent 'lakeside:consent-changed' fires so other widgets can react.
  *
- * Coordination: QuoteNudge waits for this notice to be answered before it
+ * Coordination: lower-screen surfaces wait for this notice to be answered before
  * shows, so the two floating cards never stack (same screen corner).
  *
  * TODO(CLIENT): if GA4 / Meta Pixel / Clarity is ever added, this notice must

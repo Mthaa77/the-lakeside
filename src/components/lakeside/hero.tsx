@@ -2,20 +2,17 @@
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
- * THE LAKESIDE — HERO (round 24: "the living front page")
+ * THE LAKESIDE — HERO (round 29: the quiet concierge)
  * ─────────────────────────────────────────────────────────────────────────────
- * Round 24: the backdrop is now a film. A 10-second, muted, seamlessly
- * looping shot of the estate at dusk (generated from the poster frame
- * itself — first frame == last frame == LS-016) plays behind the same
- * editorial composition. The three-frame ken-burns reel is kept as the
- * fallback layer: it is what paints first (LCP), and it stays if the
- * visitor prefers reduced motion or if autoplay is blocked. The film is
- * armed only after the page's `load` event so it never races the poster.
+ * Round 29: the quick-price form is gone (the estimator retired) — in its
+ * place a slim concierge strip: three hairline-separated doors (check your
+ * date · book a viewing · call the estate). The headline now rises line by
+ * line out of its own clip masks — a slower, more editorial entrance.
  *
- * Round 25 (demo QA): the founding year is gone (never verified) — the
- * lockup now says FAMILY-RUN; the backdrop sits inside the gilded frame as
- * a true mat (the source photo is 1251px — see TODO below), and the trust
- * row carries the verified Google rating.
+ * Round 24 still holds: the backdrop is a film (muted, seamless loop, armed
+ * after `load`), with the three-frame ken-burns reel as the LCP/fallback
+ * layer. Round 25 holds: no founding year, FAMILY-RUN lockup, framed mat,
+ * verified Google rating in the trust row.
  *
  * Everything round 21 established still holds:
  *  - no scroll-linked animation; time-based cinema only,
@@ -26,15 +23,17 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
+  CalendarCheck,
   CalendarDays,
   ChevronDown,
   Compass,
-  Search,
+  MapPin,
+  Phone,
   Users,
 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { PRICING } from '@/config/pricing';
+import { SITE } from '@/config/site';
 import { CircularSeal, CornerMarks, Rings } from './ornaments';
 import { RatingBadge } from './rating-badge';
 
@@ -77,8 +76,6 @@ function thin(n: number): string {
 }
 
 export function Hero() {
-  const [date, setDate] = useState('');
-  const [guests, setGuests] = useState('100');
   const [scrolled, setScrolled] = useState(false);
   const [frame, setFrame] = useState(0);
   const [barsOpen, setBarsOpen] = useState(false);
@@ -236,12 +233,6 @@ export function Hero() {
     const p = videoProgressRef.current;
     if (!v || !p || !v.duration) return;
     p.style.width = `${(v.currentTime / v.duration) * 100}%`;
-  };
-
-  const quickCheck = (e: React.FormEvent) => {
-    e.preventDefault();
-    window.dispatchEvent(new CustomEvent('lakeside:estimate-date', { detail: { date } }));
-    document.getElementById('estimate')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -424,16 +415,23 @@ export function Hero() {
             <span>Family-Run</span>
           </p>
 
-          {/* The headline — three quiet sentences, the last in gold italic */}
+          {/* The headline — three quiet sentences rising out of their own
+              clip masks, the last in gold italic */}
           <h1
             ref={headlineRef}
-            className="reveal mt-5 font-display text-[clamp(2.25rem,6.5vw,5.25rem)] font-medium leading-[1.04] text-marble-50 [transition-delay:200ms] [text-shadow:0_2px_40px_rgba(11,26,21,0.55)]"
+            className="hero-headline mt-5 font-display text-[clamp(2.25rem,6.5vw,5.25rem)] font-medium leading-[1.06] text-marble-50 [text-shadow:0_2px_40px_rgba(11,26,21,0.55)]"
           >
-            <span className="block">The chapel is glass.</span>
-            <span className="block">The water is still.</span>
-            <em className="gold-gradient-text gold-gradient-text--live block">
-              The day is yours.
-            </em>
+            <span className="mask-line">
+              <span className="mask-line-inner">The chapel is glass.</span>
+            </span>
+            <span className="mask-line">
+              <span className="mask-line-inner [transition-delay:130ms]">The water is still.</span>
+            </span>
+            <span className="mask-line">
+              <span className="mask-line-inner [transition-delay:260ms]">
+                <em className="gold-gradient-text gold-gradient-text--live">The day is yours.</em>
+              </span>
+            </span>
           </h1>
 
           {/* Lede */}
@@ -487,76 +485,72 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── The sixty-second estimate — borderless concierge strip ────── */}
-        <form
-          onSubmit={quickCheck}
-          aria-label="Quick price check"
-          className="reveal mt-7 w-full max-w-2xl sm:mt-10 [transition-delay:660ms]"
-        >
-          <div className="glass-card flex flex-col gap-3 rounded-2xl p-3 shadow-[inset_0_0_0_1px_rgba(237,214,164,0.35),0_24px_70px_-28px_rgba(0,0,0,0.6),0_0_70px_-24px_rgba(222,184,110,0.4)] sm:flex-row sm:items-center sm:gap-1">
-            <div className="flex flex-1 items-center gap-3 px-3 py-1 sm:py-0">
-              <CalendarDays className="h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
-              <div className="min-w-0 flex-1 space-y-0.5">
-                <label
-                  htmlFor="hero-date"
-                  className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-gold-200/85"
-                >
-                  Wedding date
-                </label>
-                <Input
-                  id="hero-date"
-                  type="date"
-                  min="2026-10-10"
-                  max="2027-12-31"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="h-7 rounded-none border-0 border-transparent bg-transparent p-0 text-sm font-medium text-marble-50 shadow-none [color-scheme:dark] focus-visible:ring-0 focus-visible:ring-offset-0"
-                />
-              </div>
-            </div>
-
-            <span className="hidden h-9 w-px bg-white/15 sm:block" aria-hidden="true" />
-
-            <div className="flex items-center gap-3 px-3 py-1 sm:w-36 sm:py-0">
-              <Users className="h-4 w-4 shrink-0 text-gold-300" aria-hidden="true" />
-              <div className="min-w-0 flex-1 space-y-0.5">
-                <label
-                  htmlFor="hero-guests"
-                  className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-gold-200/85"
-                >
-                  Guests
-                </label>
-                <Input
-                  id="hero-guests"
-                  type="number"
-                  min={20}
-                  max={PRICING.capacity.max}
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  className="h-7 rounded-none border-0 border-transparent bg-transparent p-0 text-sm font-medium text-marble-50 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="btn-shine gold-surface inline-flex h-12 items-center justify-center gap-2 rounded-xl px-6 text-sm font-semibold tracking-wide transition-transform hover:scale-[1.015] sm:h-11"
+        {/* ── The concierge strip — three quiet doors into the estate ──── */}
+        <div className="reveal mt-8 w-full max-w-2xl sm:mt-10 [transition-delay:660ms]">
+          <div className="glass-card flex flex-col divide-y divide-white/10 overflow-hidden rounded-2xl shadow-[inset_0_0_0_1px_rgba(237,214,164,0.32),0_24px_70px_-28px_rgba(0,0,0,0.6),0_0_70px_-24px_rgba(222,184,110,0.38)] sm:flex-row sm:divide-x sm:divide-y-0">
+            <a
+              href="#date"
+              className="group flex flex-1 items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/[0.07]"
             >
-              <Search className="h-4 w-4" aria-hidden="true" />
-              Estimate
-            </button>
-          </div>
-          <p className="mt-2.5 hidden pl-1 text-xs text-marble-50/65 sm:block">
-            VAT included, no site visit needed &middot; your total in under a
-            minute &middot;{' '}
+              <CalendarCheck
+                className="h-4 w-4 shrink-0 text-gold-300 transition-transform duration-300 group-hover:scale-110"
+                aria-hidden="true"
+              />
+              <span className="min-w-0">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-gold-200/85">
+                  Step one
+                </span>
+                <span className="block truncate text-sm font-medium text-marble-50">
+                  Check your date
+                </span>
+              </span>
+            </a>
             <a
               href="#visit"
+              className="group flex flex-1 items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/[0.07]"
+            >
+              <MapPin
+                className="h-4 w-4 shrink-0 text-gold-300 transition-transform duration-300 group-hover:scale-110"
+                aria-hidden="true"
+              />
+              <span className="min-w-0">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-gold-200/85">
+                  Step two
+                </span>
+                <span className="block truncate text-sm font-medium text-marble-50">
+                  Book a viewing
+                </span>
+              </span>
+            </a>
+            <a
+              href={`tel:${SITE.phoneE164}`}
+              className="group flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-white/[0.07] sm:flex-none"
+            >
+              <Phone
+                className="h-4 w-4 shrink-0 text-gold-300 transition-transform duration-300 group-hover:scale-110"
+                aria-hidden="true"
+              />
+              <span className="min-w-0">
+                <span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-gold-200/85">
+                  Prefer to talk?
+                </span>
+                <span className="block truncate text-sm font-medium text-marble-50">
+                  {SITE.phoneDisplay}
+                </span>
+              </span>
+            </a>
+          </div>
+          <p className="mt-2.5 pl-1 text-xs text-marble-50/65">
+            VAT included, every price in the open &middot; Saturdays book seasons
+            ahead &middot;{' '}
+            <a
+              href="#compare"
               className="underline decoration-gold-300/60 underline-offset-2 transition-colors hover:text-marble-50"
             >
-              or book a viewing
+              or compare the packages
             </a>
           </p>
-        </form>
+        </div>
       </div>
 
       {/* Progress — the gold line tracks the film when it plays, the still

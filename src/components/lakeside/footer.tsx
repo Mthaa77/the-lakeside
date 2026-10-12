@@ -18,7 +18,7 @@ import { RatingBadge } from './rating-badge';
 
 const EXPLORE_LINKS = [
   { label: 'The estate', href: '#estate' },
-  { label: 'Estimate your day', href: '#estimate' },
+  { label: 'Check your date', href: '#date' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'FAQ & rules', href: '#faq' },
   { label: 'Privacy & POPIA', href: '#privacy' },

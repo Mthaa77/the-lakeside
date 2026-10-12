@@ -1,6 +1,6 @@
 /**
  * THE LAKESIDE — DEVICE-CONSENT STORAGE (client-only helpers)
- * Shared by ConsentNotice + QuoteNudge. Kept out of the component file so
+ * Shared by ConsentNotice and the lower-screen surfaces. Kept out of the component file so
  * React Fast Refresh can hot-swap the notice without a full page reload
  * (a component file must only export components to stay refresh-safe).
  *

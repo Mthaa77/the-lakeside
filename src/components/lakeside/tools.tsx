@@ -215,7 +215,7 @@ export function PackageComparator() {
               </dl>
 
               <Button asChild variant={col.highlight ? 'default' : 'outline'} className="mt-5 w-full rounded-full">
-                <a href="#estimate">Build this estimate <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" /></a>
+                <a href="#date">Check your date <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" /></a>
               </Button>
             </article>
           ))}
@@ -232,7 +232,7 @@ export function PackageComparator() {
         </p>
         <p className="mt-4 text-xs leading-relaxed text-ink-600">
           Thursdays price both ways — the weekend rate card and the weekday all-inclusive. Florals are in-house only on every
-          package; accommodation is quoted separately in the estimator.
+          package; accommodation is quoted separately on request.
         </p>
       </div>
     </Reveal>

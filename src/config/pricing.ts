@@ -2,7 +2,7 @@
  * ─────────────────────────────────────────────────────────────────────────────
  * THE LAKESIDE — PRICING SOURCE OF TRUTH
  * ─────────────────────────────────────────────────────────────────────────────
- * Every price, minimum, capacity, deposit and fee on the site (UI, estimator,
+ * Every price, minimum, capacity, deposit and fee on the site (UI, calendar,
  * payment schedule, PDF, structured data) MUST come from this file.
  * No prices hard-coded in components or copy.
  *
@@ -154,7 +154,7 @@ export const SA_PUBLIC_HOLIDAYS: Record<number, string[]> = {
   ],
 };
 
-/** Human labels for inclusions, used by estimator cards + package comparator. */
+/** Human labels for inclusions, used by the package comparator + rate card. */
 export const PACKAGE_INCLUSIONS = {
   weekend: {
     mealCourses: '4 courses — 4 canapés, plated starter, plated or buffet main, plated dessert',

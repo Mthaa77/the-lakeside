@@ -3,7 +3,8 @@
 /**
  * THE LAKESIDE — WEDDINGS & PRICING
  * "Our prices are on the page." Headline numbers from pricing.ts,
- * package cards, weekday tier slider teaser and the full estimator.
+ * package cards, weekday tier slider and the date ledger below —
+ * every rate printed, nothing behind an enquiry form.
  */
 
 import { useMemo, useState } from 'react';
@@ -12,9 +13,17 @@ import { PRICING, CONFIGURED_YEARS } from '@/config/pricing';
 import { formatZAR } from '@/lib/pricing-engine';
 import { Reveal } from './reveal';
 import DateChecker from './date-checker';
-import Estimator from './estimator';
 import { OrnamentDivider, CornerMarks, Rings } from './ornaments';
-import { GlassWater, Cake, Music, Sparkles, HeartHandshake, ArrowRight, Zap } from 'lucide-react';
+import { GlassWater, Cake, Music, Sparkles, HeartHandshake, ArrowRight, Zap, CalendarCheck, Phone, MessageCircle } from 'lucide-react';
+import { SITE } from '@/config/site';
+
+/** The four weekend-card day types — printed here as a gilded ledger. */
+const DAY_LEDGER: { key: string; day: string; hire: number; min: number; note: string }[] = [
+  { key: 'sat', day: 'Saturday', hire: PRICING.venueHire.sat, min: PRICING.minAdults.sat, note: 'The full golden hour — books seasons ahead.' },
+  { key: 'fri', day: 'Friday', hire: PRICING.venueHire.fri, min: PRICING.minAdults.fri, note: 'Same card, softer light, quieter roads.' },
+  { key: 'sun', day: 'Sunday', hire: PRICING.venueHire.sun, min: PRICING.minAdults.sun, note: 'Long lunches that drift into the evening.' },
+  { key: 'monThu', day: 'Mon to Thu', hire: PRICING.venueHire.monThu, min: PRICING.minAdults.mon, note: 'All-inclusive packages — see the calculator above.' },
+];
 
 const WEEKDAY_TIERS: [number, number][] = [
   [20, 58000], [30, 70000], [40, 85000], [50, 100000], [60, 110000],
@@ -64,7 +73,8 @@ export function WeddingsPricing() {
             <Reveal className="lg:col-span-5">
               <p className="eyebrow text-brass-400">Open pricing</p>
               <h2 className="mt-3 font-display text-4xl font-medium leading-tight text-balance sm:text-5xl">
-                Our prices are on the page.
+                The whole price,{' '}
+                <em className="gold-gradient-text gold-gradient-text--live">on the page</em>.
               </h2>
               <p className="mt-4 max-w-md text-pretty text-base leading-relaxed text-marble-50/85">
                 Pick a date and guest count; see your total in under a minute. No
@@ -92,8 +102,8 @@ export function WeddingsPricing() {
                 <div className="brass-hairline" />
               </dl>
 
-              {/* Rate-card year toggle — the estimator picks the year from your
-                  wedding date automatically; this is the same rate card, browsable. */}
+              {/* Rate-card year toggle — rates follow the wedding-date year;
+                  this is the same rate card, browsable. */}
               <div className="mt-6">
                 <div
                   role="tablist"
@@ -117,8 +127,8 @@ export function WeddingsPricing() {
                   })}
                 </div>
                 <p className="mt-3 text-xs text-marble-50/60">
-                  Your wedding <strong className="font-medium text-marble-50/80">date year</strong> sets the rates
-                  in the estimator — venue hire is the same in {CONFIGURED_YEARS[0]} and {CONFIGURED_YEARS[1]}.
+                  Your wedding <strong className="font-medium text-marble-50/80">date year</strong> sets the rates —
+                  venue hire is the same in {CONFIGURED_YEARS[0]} and {CONFIGURED_YEARS[1]}.
                 </p>
                 <div
                   className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 rounded-[4px] border border-white/10 bg-white/[0.04] p-4 text-xs sm:grid-cols-3"
@@ -138,7 +148,7 @@ export function WeddingsPricing() {
 
               <p className="mt-4 text-xs leading-relaxed text-marble-50/60">
                 Weekends: minimum paying adults apply (Sat 80 · Fri 60 · Sun &amp; Thu 40).
-                December and public holidays follow their own rules — the estimator shows them.
+                December and public holidays follow their own rules — the calendar below shows each day-type.
               </p>
             </Reveal>
 
@@ -187,7 +197,7 @@ export function WeddingsPricing() {
                 </div>
                 <p className="mt-3 text-xs text-marble-50/60">
                   110+ weekday guests: price on request. Thursdays also qualify for the
-                  weekend rate card — compare both in the estimator.
+                  weekend rate card — compare both on the printed list below.
                 </p>
               </div>
             </Reveal>
@@ -195,43 +205,116 @@ export function WeddingsPricing() {
         </div>
       </section>
 
-      {/* ── Date checker + estimator ──────────────────────────────────── */}
-      <section id="estimate" aria-label="Estimate your wedding" className="marble-texture bg-marble-50">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow text-brass-600">Your date, your number</p>
+      {/* ── The date ledger — calendar + printed day-types ─────────────── */}
+      <section id="date" aria-label="Check your wedding date" className="marble-texture relative overflow-hidden bg-marble-50">
+        <div aria-hidden="true" className="champagne-wash pointer-events-none absolute inset-0" />
+        <div aria-hidden="true" className="gold-bloom pointer-events-none absolute -top-24 right-0 h-64 w-96 opacity-40" />
+        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <Reveal variant="cine" className="mx-auto max-w-2xl text-center">
+            <OrnamentDivider tone="brass" center="rings" className="mb-8" />
+            <p className="eyebrow eyebrow-dash text-brass-600">Your date, your day-type</p>
             <h2 className="mt-3 font-display text-4xl font-medium text-balance text-pine-900 sm:text-5xl">
-              Check a date. See the price.
+              Check a date. <em className="gold-gradient-text gold-gradient-text--deep gold-gradient-text--live">See its light.</em>
             </h2>
             <p className="mt-4 text-pretty text-base leading-relaxed text-ink-600">
-              Two tools, one minute: pick a date to see the day type and minimums, then
-              build your estimate — venue hire, food, extras and the deposit that secures it.
+              Tap any day on the 2026–2027 calendar for its day-type, venue hire and
+              minimums. Every date is confirmed by a person — never just a calendar.
             </p>
           </Reveal>
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-12">
-            <Reveal className="lg:col-span-5">
-              <div className="rounded-[6px] border border-marble-200 bg-white p-6 shadow-[0_20px_60px_-30px_rgba(16,38,30,0.3)]">
-                <h3 className="font-display text-xl text-pine-900">Date checker</h3>
-                <p className="mt-1 text-xs text-ink-600">
-                  Shows day types and rules — availability is confirmed by the team, never the calendar.
-                </p>
-                <div className="mt-4">
-                  <DateChecker />
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={100} className="lg:col-span-7">
+          <div className="mt-12 grid items-start gap-8 lg:grid-cols-12">
+            {/* The calendar */}
+            <Reveal className="lg:col-span-7">
               <div className="rounded-[6px] border border-marble-200 bg-white p-6 shadow-[0_20px_60px_-30px_rgba(16,38,30,0.3)] sm:p-8">
-                <h3 className="font-display text-xl text-pine-900">Cost estimator</h3>
-                <p className="mt-1 text-xs text-ink-600">
-                  Every price from our published 2026/2027 rate card. Deposit and payment schedule included.
-                </p>
-                <div className="mt-4">
-                  <Estimator variant="full" />
-                </div>
+                <DateChecker />
               </div>
             </Reveal>
+
+            {/* The printed day-types + what happens next */}
+            <div className="flex flex-col gap-8 lg:col-span-5">
+              <Reveal delay={100}>
+                <div className="frame-corners relative">
+                  <span className="fc-b absolute inset-0" aria-hidden="true" />
+                  <div className="relative rounded-[4px] border border-brass-500/30 bg-gradient-to-br from-brass-500/[0.07] via-white to-gold-300/[0.12] p-6 sm:p-7">
+                    <div className="flex items-center gap-3">
+                      <Rings className="h-6 w-auto shrink-0 text-brass-600" />
+                      <span aria-hidden="true" className="h-px flex-1 bg-gradient-to-r from-brass-500/50 to-transparent" />
+                      <span className="wax-dot" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 font-display text-xl text-pine-900">The day-type ledger</h3>
+                    <p className="mt-1 text-xs text-ink-600">
+                      Weekend venue hire, printed — the same numbers the calendar uses.
+                    </p>
+                    <ul className="mt-5 divide-y divide-brass-500/15">
+                      {DAY_LEDGER.map((row) => (
+                        <li key={row.key} className="flex items-baseline justify-between gap-4 py-3">
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-pine-900">{row.day}</p>
+                            <p className="mt-0.5 text-xs leading-snug text-ink-600">{row.note}</p>
+                          </div>
+                          <div className="shrink-0 text-right">
+                            <p className="font-display text-lg text-brass-700 tabular-nums">{formatZAR(row.hire)}</p>
+                            <p className="text-[11px] text-ink-600/80 tabular-nums">min {row.min} adults</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-4 border-t border-brass-500/20 pt-3 text-[11px] leading-relaxed text-ink-600/80">
+                      VAT included. December and public holidays carry their own day-types —
+                      shown on the calendar and confirmed by the team.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={180}>
+                <div className="rounded-[4px] border border-marble-200 bg-white p-6 shadow-[0_16px_44px_-28px_rgba(16,38,30,0.35)] sm:p-7">
+                  <h3 className="font-display text-lg text-pine-900">After the calendar</h3>
+                  <ol className="mt-4 space-y-3.5">
+                    {[
+                      { t: 'Shortlist your dates', d: 'Save two or three and compare their day-types side by side.' },
+                      { t: 'Come stand in the chapel', d: 'A viewing in person or a virtual walkthrough — about an hour.' },
+                      { t: 'We hold your date', d: 'The team confirms availability and the numbers that secure it.' },
+                    ].map((s, i) => (
+                      <li key={s.t} className="flex gap-3.5">
+                        <span
+                          aria-hidden="true"
+                          className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-brass-500/40 bg-marble-50 font-display text-xs font-semibold text-brass-700"
+                        >
+                          {i + 1}
+                        </span>
+                        <div>
+                          <p className="text-sm font-medium text-pine-900">{s.t}</p>
+                          <p className="mt-0.5 text-xs leading-relaxed text-ink-600">{s.d}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <div className="mt-5 flex flex-wrap gap-3 border-t border-marble-200 pt-5">
+                    <a
+                      href="#visit"
+                      className="btn-shine inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pine-900 px-5 text-sm font-medium text-marble-50 transition-colors hover:bg-pine-700"
+                    >
+                      <CalendarCheck className="h-4 w-4" aria-hidden="true" />
+                      Book a viewing
+                    </a>
+                    <a
+                      href={`https://wa.me/${SITE.whatsappE164}?text=${encodeURIComponent("Hi Lakeside! I've checked dates on your calendar and would like to ask if mine is free.")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brass-500/50 px-5 text-sm font-medium text-pine-900 transition-colors hover:border-ruby-500 hover:text-ruby-600"
+                    >
+                      <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                      Ask if it&rsquo;s free
+                    </a>
+                  </div>
+                  <p className="mt-3 flex items-center gap-1.5 text-[11px] text-ink-600/80">
+                    <Phone className="h-3 w-3" aria-hidden="true" />
+                    Or call {SITE.phoneDisplay} — a person answers.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>

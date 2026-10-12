@@ -14,8 +14,8 @@
  *
  * Events:
  *  - listens 'lakeside:prefill-date' (detail: { date }) → selects + navigates.
- *  - dispatches 'lakeside:estimate-date' (detail: { date }) via "Estimate this
- *    date" so the page can scroll to the estimator.
+ *  - the selected-date card and shortlist link straight through to the
+ *    viewing form (#visit) — availability is always confirmed by a person.
  */
 
 import * as React from 'react';
@@ -247,10 +247,6 @@ function FullChecker() {
     setSelected(iso);
   });
 
-  const estimateThis = React.useCallback((iso: string) => {
-    window.dispatchEvent(new CustomEvent('lakeside:estimate-date', { detail: { date: iso } }));
-  }, []);
-
   return (
     <section className="glass-card-light rounded-[4px] p-6 text-pine-900 md:p-8" aria-label="Check your wedding date">
       <header className="mb-6">
@@ -278,7 +274,6 @@ function FullChecker() {
         <div className="mt-5 max-w-sm">
           <DateCard
             iso={selected}
-            onEstimate={estimateThis}
             saved={shortlist.dates.includes(selected)}
             onToggleSave={shortlist.toggle}
             shortlistFull={shortlist.dates.length >= SHORTLIST_MAX}
@@ -296,7 +291,7 @@ function FullChecker() {
       )}
 
       <div className="mt-6 max-w-2xl">
-        <ShortlistPanel dates={shortlist.dates} onRemove={shortlist.toggle} onEstimate={estimateThis} />
+        <ShortlistPanel dates={shortlist.dates} onRemove={shortlist.toggle} />
       </div>
 
       <p className="mt-5 text-xs text-ink-600/80">
@@ -327,11 +322,6 @@ function CompactChecker() {
     if (idx >= MIN_IDX && idx <= MAX_IDX) setView({ y, m });
     setSelected(iso);
   });
-
-  const estimateThis = React.useCallback((iso: string) => {
-    window.dispatchEvent(new CustomEvent('lakeside:estimate-date', { detail: { date: iso } }));
-    setOpen(false);
-  }, []);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -364,7 +354,6 @@ function CompactChecker() {
           <div className="mt-4">
             <DateCard
               iso={selected}
-              onEstimate={estimateThis}
               saved={shortlist.dates.includes(selected)}
               onToggleSave={shortlist.toggle}
               shortlistFull={shortlist.dates.length >= SHORTLIST_MAX}
@@ -578,7 +567,6 @@ function Legend() {
 
 function DateCard({
   iso,
-  onEstimate,
   saved,
   onToggleSave,
   shortlistFull,
@@ -587,7 +575,6 @@ function DateCard({
   onSelect,
 }: {
   iso: string;
-  onEstimate: (iso: string) => void;
   saved: boolean;
   onToggleSave: (iso: string) => void;
   shortlistFull: boolean;
@@ -600,7 +587,7 @@ function DateCard({
   const hire = PRICING.venueHire[c.hireKey];
   const eligible = weekdayEligible(c);
 
-  // Wedding-day countdown (same chip as the estimator results header).
+  // Wedding-day countdown (same chip style across the date tools).
   const daysToGo = Math.round(
     (new Date(`${iso}T00:00:00`).getTime() - new Date().setHours(0, 0, 0, 0)) / 86_400_000,
   );
@@ -770,12 +757,10 @@ function DateCard({
         </div>
       ) : null}
       <div className="mt-4 flex flex-wrap gap-3">
-        <Button
-          type="button"
-          onClick={() => onEstimate(iso)}
+        <Button asChild
           className="rounded-[4px] bg-pine-900 text-marble-50 hover:bg-pine-800"
         >
-          Estimate this date
+          <a href="#visit">Book a viewing</a>
         </Button>
         <Button asChild variant="outline" className="rounded-[4px] border-pine-900/30 text-pine-900 hover:bg-marble-100">
           <a href={wa} target="_blank" rel="noopener noreferrer">
@@ -797,11 +782,9 @@ function DateCard({
 function ShortlistPanel({
   dates,
   onRemove,
-  onEstimate,
 }: {
   dates: string[];
   onRemove: (iso: string) => void;
-  onEstimate: (iso: string) => void;
 }) {
   if (dates.length === 0) {
     return (
@@ -864,13 +847,12 @@ function ShortlistPanel({
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-2">
-              <button
-                type="button"
-                onClick={() => onEstimate(row.iso)}
+              <a
+                href="#visit"
                 className="inline-flex min-h-[44px] items-center rounded-[4px] bg-pine-900 px-3.5 py-1.5 text-xs font-medium text-marble-50 transition-colors hover:bg-pine-800"
               >
-                Estimate
-              </button>
+                Enquire
+              </a>
               <button
                 type="button"
                 onClick={() => onRemove(row.iso)}

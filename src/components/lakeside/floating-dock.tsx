@@ -9,7 +9,7 @@
  *   with a ruby "message us" dot and a glossy gold "Check a date" CTA.
  * - MobileDock (mobile, <lg): a floating light-glass pill that replaces the
  *   old full-width action bar — gold-rimmed, with a raised gold WhatsApp FAB.
- * Both honour the safe-area inset and stay clear of QuoteNudge / BackToTop.
+ * Both honour the safe-area inset and stay clear of ConsentNotice / BackToTop.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -46,7 +46,7 @@ type DockItem = {
 const NAV_ITEMS: DockItem[] = [
   { id: 'estate', label: 'The estate', href: '#estate', icon: Landmark },
   { id: 'pricing', label: 'Pricing', href: '#pricing', icon: Receipt },
-  { id: 'estimate', label: 'Estimate', href: '#estimate', icon: CalendarCheck },
+  { id: 'date', label: 'Dates', href: '#date', icon: CalendarCheck },
   { id: 'gallery', label: 'Gallery', href: '#gallery', icon: Images },
   { id: 'explore', label: 'Estate map', href: '#explore', icon: Map },
   { id: 'visit', label: 'Visit us', href: '#visit', icon: CalendarDays },
@@ -57,8 +57,7 @@ const SECTION_TO_DOCK: Record<string, string> = {
   estate: 'estate',
   weddings: 'pricing',
   pricing: 'pricing',
-  estimate: 'estimate',
-  estimator: 'estimate',
+  date: 'date',
   compare: 'pricing',
   gallery: 'gallery',
   explore: 'explore',

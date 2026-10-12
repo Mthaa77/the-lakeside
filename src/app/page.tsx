@@ -13,8 +13,6 @@ import { ChefAccommodation } from '@/components/lakeside/stories';
 import { FaqRules } from '@/components/lakeside/faq-rules';
 import { Visit } from '@/components/lakeside/visit';
 import { Footer } from '@/components/lakeside/footer';
-import { QuoteNudge } from '@/components/lakeside/quote-nudge';
-import { SharedQuote } from '@/components/lakeside/shared-quote';
 import { BackToTop } from '@/components/lakeside/back-to-top';
 import { TeamDigest } from '@/components/lakeside/team-digest';
 import { RippleDivider } from '@/components/lakeside/ripple-divider';
@@ -143,8 +141,8 @@ export default function Home() {
               </div>
               <p className="eyebrow eyebrow-dash text-gold-300">The glass atrium</p>
               <h2 className="mt-3 font-display text-4xl font-medium text-balance text-marble-50 sm:text-5xl">
-                Wander the{' '}
-                <em className="gold-gradient-text gold-gradient-text--live">gallery</em>
+                Every frame,{' '}
+                <em className="gold-gradient-text gold-gradient-text--live">in motion</em>
               </h2>
               <p className="mt-4 text-pretty text-base leading-relaxed text-marble-50/80">
                 A salon wall that spins — drag, flick or arrow through every frame
@@ -166,7 +164,7 @@ export default function Home() {
               </h2>
               <p className="mt-4 text-pretty text-base leading-relaxed text-marble-50/80">
                 Tap a hotspot to meet each room, shift the time of day, and plan
-                your seating — the numbers then walk straight into your estimate.
+                your seating at real tables — then walk it all in person.
               </p>
             </Reveal>
           </div>
@@ -259,9 +257,7 @@ export default function Home() {
         <PrivacyNotice />
       </main>
 
-      <QuoteNudge />
       <ConsentNotice />
-      <SharedQuote />
       <BackToTop />
       <TeamDigest />
       <Footer />

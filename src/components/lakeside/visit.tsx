@@ -419,7 +419,7 @@ export function Visit() {
                       </a>
                     </Button>
                     <Button asChild variant="outline" className="rounded-full border-white/25 bg-transparent text-marble-50 hover:bg-white/10 hover:text-marble-50">
-                      <a href="#estimate">Build my estimate</a>
+                      <a href="#date">Check your date</a>
                     </Button>
                   </div>
                   <div className="mt-2 w-full max-w-md text-left">

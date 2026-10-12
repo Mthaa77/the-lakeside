@@ -892,7 +892,7 @@ export default function GalleryCarousel() {
                     <ChevronRight className="size-4" aria-hidden="true" />
                   </button>
                   <a
-                    href="#estimate"
+                    href="#date"
                     onClick={() => setLightbox(null)}
                     className={buttonVariants({
                       size: 'sm',
@@ -900,7 +900,7 @@ export default function GalleryCarousel() {
                         'gold-surface ml-1 rounded-full font-semibold',
                     })}
                   >
-                    See your estimate
+                    Check your date
                   </a>
                 </div>
               </div>

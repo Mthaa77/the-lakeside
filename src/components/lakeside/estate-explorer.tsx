@@ -18,7 +18,7 @@
  * - Detail panel: watermark numeral, curated facts, three thumbnails, CTAs.
  * - Planner: guest slider, dance-floor switch (auto-off > 160) and a
  *   floor-plan-grade table map (round tables of 10 + dance floor block)
- *   that hands its numbers to the estimator via 'lakeside:estimate-guests'.
+ *   with a 'See the price' jump to the open rate card (#pricing).
  *
  * Accessibility: every hotspot is a focusable <g role="button"> with an
  * enlarged invisible hit area; routes and pulses are aria-hidden; the whole
@@ -174,7 +174,7 @@ const SPACES: Space[] = [
       `${PRICING.accommodation.maxRooms} rooms sleeping up to ${PRICING.accommodation.maxGuests} guests`,
       `Heritage rooms ${formatZAR(ROOMS_2026.heritage)} / night · Manor rooms ${formatZAR(ROOMS_2026.manor)} / night (2026 rate)`,
       'One accommodation payment to the venue — the bridal party collects room by room',
-      '2027 weddings bill at 2027 rates — see the estimator',
+      '2027 weddings bill at 2027 rates — see the rate card',
     ],
     thumbs: ['LS-072', 'LS-032', 'LS-033'],
   },
@@ -500,14 +500,6 @@ export default function EstateExplorer() {
   const day = DAY_OPTIONS.find((d) => d.id === dayId) ?? DAY_OPTIONS[0];
   const minAdults = useMemo(() => minAdultsFor(classifyDate(day.date)), [day.date]);
   const tables = Math.ceil(guests / 10);
-
-  const seePrice = () => {
-    window.dispatchEvent(
-      new CustomEvent('lakeside:estimate-guests', {
-        detail: { guests, danceFloor: danceActive, dayType: day.id },
-      }),
-    );
-  };
 
   // ── Table-map geometry (floor-plan grade) ────────────────────────────────
   const COLS = 5;
@@ -1202,7 +1194,7 @@ export default function EstateExplorer() {
                 asChild
                 className="btn-shine gold-surface mt-6 rounded-full px-6 font-semibold text-pine-950"
               >
-                <a href="#estimate" onClick={seePrice}>
+                <a href="#pricing">
                   See the price for {guests} guests
                 </a>
               </Button>

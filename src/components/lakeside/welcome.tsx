@@ -1,13 +1,13 @@
 'use client';
 
 /**
- * THE LAKESIDE — WELCOME (round 25, demo-QA rewrite)
+ * THE LAKESIDE — WELCOME (round 29, the receiving room)
  * A premium marble "receiving room" directly under the hero: family welcome
- * copy with a drop cap and signature, a drifting collage of estate photos in
- * gilded frames, a floating family-run seal, and a verified-facts stats row.
+ * copy with a drop cap, a three-beat promise of how the day unfolds, the
+ * owners' signature, a drifting collage of estate photos in gilded frames,
+ * a floating family-run seal, and a verified-facts stats row.
  * Every claim below is on the client's verified-facts list — no founding
  * year, no invented history.
- * Ambient gold + ruby blooms keep the palette present without noise.
  */
 
 import { useRef } from 'react';
@@ -22,6 +22,13 @@ const STATS = [
   { n: '9', label: 'Rooms, up to 18 guests' },
   { n: '14h', label: 'Coordinator, 08h00–22h00' },
   { n: 'Auto', label: 'Backup generator' },
+] as const;
+
+/** How the day unfolds — three beats, all verified estate facts. */
+const DAY_BEATS = [
+  { t: 'Late morning', d: 'Vows in the glass chapel, pines and still water behind you.' },
+  { t: 'Golden hour', d: 'Portraits on the deck, the lawns and the lake doing the rest.' },
+  { t: 'Evening', d: 'Dinner under the chandeliers, sparklers out on the lawn.' },
 ] as const;
 
 /** Small spinning gold seal — shared visual language with the hero. */
@@ -80,6 +87,10 @@ export function Welcome() {
             A family-run estate{' '}
             <em className="gold-gradient-text gold-gradient-text--deep gold-gradient-text--live">on the water.</em>
           </h2>
+          <p className="mt-4 text-pretty text-base leading-relaxed text-ink-600">
+            Small enough to know your names by the second visit; large enough to
+            hold two hundred of the people you love most.
+          </p>
         </Reveal>
 
         <div className="mt-14 grid items-center gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
@@ -96,8 +107,34 @@ export function Welcome() {
               </p>
               <p className="mt-5 text-pretty text-base leading-relaxed text-ink-600">
                 Glass chapel, marble reception on the water, a century-old slate
-                house and zebra on the lawn — all yours for the day.
+                house and zebra on the lawn — all yours for the day, and for the
+                night after, with nine rooms kept for your wedding party.
               </p>
+            </Reveal>
+
+            {/* How the day unfolds — the promise in three beats */}
+            <Reveal delay={140} className="mt-9">
+              <p className="eyebrow text-brass-600">How the day unfolds</p>
+              <ol className="mt-4">
+                {DAY_BEATS.map((b, i) => (
+                  <li key={b.t} className="relative flex gap-4 pb-5 last:pb-0">
+                    {i < DAY_BEATS.length - 1 && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-[5px] top-4 h-full w-px bg-gradient-to-b from-brass-500/50 to-brass-500/10"
+                      />
+                    )}
+                    <span
+                      aria-hidden="true"
+                      className="mt-1.5 size-[11px] shrink-0 rotate-45 border border-brass-500 bg-marble-50 shadow-[0_0_0_3px_rgba(184,155,106,0.15)]"
+                    />
+                    <div>
+                      <p className="text-sm font-semibold tracking-wide text-pine-900">{b.t}</p>
+                      <p className="mt-0.5 text-sm leading-relaxed text-ink-600">{b.d}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </Reveal>
 
             {/* Signature — named owners; team photo needs consent first.

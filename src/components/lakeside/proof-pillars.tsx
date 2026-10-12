@@ -120,8 +120,9 @@ export function ProofPillars() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
           <Reveal variant="cine" className="mx-auto max-w-2xl text-center">
             <p className="eyebrow text-brass-600">The estate</p>
-            <h2 className="mt-3 font-display text-4xl font-medium text-pine-900 sm:text-5xl">
-              Three signatures you&rsquo;ll remember
+            <h2 className="mt-3 font-display text-4xl font-medium text-balance text-pine-900 sm:text-5xl">
+              The chapel. The water.{' '}
+              <em className="gold-gradient-text gold-gradient-text--deep">The wild.</em>
             </h2>
             <p className="mt-4 text-pretty text-base leading-relaxed text-ink-600">
               One estate, entirely yours. Every space sits within a short walk on the

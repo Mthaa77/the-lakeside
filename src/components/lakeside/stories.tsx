@@ -342,8 +342,9 @@ export function ChefAccommodation() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="eyebrow text-brass-600">Beyond weddings</p>
-            <h2 className="mt-3 font-display text-4xl font-medium text-pine-900">
-              The estate works for every occasion
+            <h2 className="mt-3 font-display text-4xl font-medium text-balance text-pine-900">
+              Every occasion,{' '}
+              <em className="gold-gradient-text gold-gradient-text--deep">the same care</em>
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -388,7 +389,7 @@ export function ChefAccommodation() {
           </div>
           <Reveal className="mt-8 text-center">
             <p className="text-xs text-ink-600">
-              Package contents: {PACKAGE_INCLUSIONS.weekend.mealCourses.toLowerCase()} — see the full list in the estimator.
+              Package contents: {PACKAGE_INCLUSIONS.weekend.mealCourses.toLowerCase()} — the full list is printed under Weekend weddings.
             </p>
           </Reveal>
         </div>

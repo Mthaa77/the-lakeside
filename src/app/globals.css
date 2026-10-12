@@ -688,44 +688,26 @@ html {
   .float-slow { animation: float-slow 7s ease-in-out infinite; }
 }
 
-/* ── Print: only the estimate results card ──────────────────────────────── */
-@media print {
-  html.print-estimate body * {
-    visibility: hidden;
-    box-shadow: none !important;
-  }
-  html.print-estimate #estimate-print-root,
-  html.print-estimate #estimate-print-root * {
-    visibility: visible;
-  }
-  html.print-estimate #estimate-print-root {
-    position: absolute;
-    inset: 0 auto auto 0;
-    width: 100%;
-    border: none;
-    background: #ffffff !important;
-    padding: 1.5rem 1rem;
-  }
-  html.print-estimate .glass-card-light {
-    backdrop-filter: none;
-    background: #ffffff !important;
-  }
-  html.print-estimate .bg-pine-900,
-  html.print-estimate [class*="bg-pine-900"] {
-    background: #ffffff !important;
-    color: #10261e !important;
-  }
-  html.print-estimate [class*="text-marble-50"] {
-    color: #10261e !important;
-  }
-  html.print-estimate [class*="text-marble-50/70"],
-  html.print-estimate [class*="text-marble-50/85"] {
-    color: #4c5659 !important;
-  }
-  /* Keep the estimate to sane page breaks */
-  html.print-estimate #estimate-print-root li,
-  html.print-estimate #estimate-print-root ol {
-    break-inside: avoid;
+/* ── Hero mask reveal: each headline line rises out of its own clip ────── */
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em; /* keep descenders (y, g) inside the mask */
+  margin-bottom: -0.08em;
+}
+.mask-line > .mask-line-inner {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.hero-headline.revealed .mask-line > .mask-line-inner {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mask-line > .mask-line-inner {
+    transform: none !important;
+    transition: none !important;
   }
 }
 
