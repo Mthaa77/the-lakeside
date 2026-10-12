@@ -68,3 +68,18 @@ Stage Summary:
 - Site is now estimator-free: pricing transparency carried by rate card + weekday calculator + comparator + day-type ledger; conversion path = calendar → viewing → WhatsApp/phone
 - All anchors consistent: #date (calendar), #pricing (rate card), #visit (form); section ids updated in header scroll-spy + dock maps
 - GitHub push pending at time of writing — commit follows this entry (main branch, private repo Mthaa77/the-lakeside)
+
+---
+Task ID: 29-b
+Agent: Z.ai Code (main)
+Task: GitHub push status for round 29
+
+Work Log:
+- Committed locally: b302afd "Round 29 — retire the estimator, hero concierge, richer welcome, editorial headings" (22 files, +357/−2332), squashed the sandbox auto-committer's UUID commit into it — history stays 73f5cd6 → 6508728 → b302afd
+- Push BLOCKED: sandbox session reset wiped GH_TOKEN from the environment (no gh CLI, no stored credentials, no ~/.git-credentials). Remote still at 6508728
+- Hygiene verified before commit: .gitignore intact, dev.log/db/.env/upload ignored, 393 tracked files, zero junk
+
+Stage Summary:
+- NEXT SESSION: once the user provides a fresh GitHub token (fine-grained or classic with repo scope), push with:
+  git -C /home/z/my-project -c credential.helper='!f() { echo "username=x-access-token"; echo "password=$TOKEN"; }; f' push origin main
+- Nothing else outstanding from this round
