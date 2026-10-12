@@ -83,3 +83,25 @@ Stage Summary:
 - NEXT SESSION: once the user provides a fresh GitHub token (fine-grained or classic with repo scope), push with:
   git -C /home/z/my-project -c credential.helper='!f() { echo "username=x-access-token"; echo "password=$TOKEN"; }; f' push origin main
 - Nothing else outstanding from this round
+
+---
+Task ID: 30
+Agent: Z.ai Code (main)
+Task: Push round 29 to GitHub (user supplied fresh token) + final estimator-echo sweep
+
+Work Log:
+- User provided a fresh fine-grained PAT in chat. Verified repo hygiene first (per 29-b warning): working tree clean, 390 tracked files, zero junk matches (.env/dev.log/db/upload/.next/tool-results), .gitignore intact, remote = https://github.com/Mthaa77/the-lakeside.git
+- Squashed the auto-committer's UUID commit (095fab0, worklog.md only) into a properly named commit 70f11fe "Round 29 handover — worklog notes" — history stays readable
+- Pre-push render sweep caught 3 LAST estimator echoes in copy (DOM had zero #estimate anchors, but text still referenced the retired tool):
+  * layout.tsx meta description: "see your estimate in under a minute" → "check your date and book a viewing"
+  * privacy.tsx: dropped the stale "estimates saved on this device (local storage)" bullet (shared-quote localStorage feature was deleted); merged guest-count estimate wording into the enquiries bullet
+  * visit.tsx confirmation: "send your estimate to your partner" → "share the date you have in mind with your partner"
+  * Reviewed and KEPT (legitimate): "Guests (estimate)" visit-form label, "Estimated total" pricing/comparator price lines, WhatsApp prefilled "Estimated total", privacy "enquiries... you send us", pricing intro "see your total in under a minute" (accurately describes the on-page comparator)
+- lint clean; committed fda3254 "Round 29 sweep — purge last estimator echoes (meta description, privacy copy, visit confirmation)"
+- PUSHED with one-time credential helper (username=Mthaa77, PAT as password, env-var only): 6508728..fda3254 main -> main. Verified via authenticated ls-remote: refs/heads/main = fda3254. Token NOT persisted: remote URL clean, no ~/.git-credentials, no credential.helper config
+- agent-browser QA after push: page 200 + correct title, zero console errors, zero #estimate anchors, concierge strip/welcome timeline (3 beats)/pricing heading/#date all render, no horizontal scroll desktop 1440 + mobile 390, dock intact, footer fine, meta description serves the new copy. Welcome label initially read false in innerText — confirmed it was just the framer-motion Reveal not yet triggered; after scrollIntoView it reveals (opacity 1)
+
+Stage Summary:
+- GitHub main = fda3254: 73f5cd6 → 6508728 → b302afd → 70f11fe → fda3254. Round 29 (hero concierge + mask reveal, estimator retired, #date ledger section, richer welcome, editorial headings) is FULLY SHIPPED
+- Estimator references now zero in DOM anchors; remaining "estimate" strings in render are all legitimate copy (verified one by one)
+- Next session: no blockers. Candidates for future rounds: restore the 15-min webDevReview cron (created this session), further premium polish per user direction
