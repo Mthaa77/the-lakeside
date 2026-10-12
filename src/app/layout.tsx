@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | The Lakeside",
   },
   description:
-    "A modern glass chapel, a marble reception on the water's edge and zebra grazing beyond your canapés. Family-run estate in Tiegerpoort, Pretoria East. Open pricing — see your estimate in under a minute.",
+    "A modern glass chapel, a marble reception on the water's edge and zebra grazing beyond your canapés. Family-run estate in Tiegerpoort, Pretoria East. Open pricing — check your date and book a viewing.",
   icons: {
     icon: [
       { url: "/brand/icon-32.png", sizes: "32x32", type: "image/png" },

@@ -387,7 +387,7 @@ export function Visit() {
                   <h3 className="mt-4 font-display text-2xl">Thank you — request received.</h3>
                   <p className="mt-2 max-w-sm text-sm leading-relaxed text-marble-50/80">
                     We&rsquo;ll confirm your {mode === 'in_person' ? 'viewing on the estate' : 'virtual viewing'} shortly.
-                    Meanwhile, send your estimate to your partner or ask us anything on WhatsApp.
+                    Meanwhile, share the date you have in mind with your partner, or ask us anything on WhatsApp.
                   </p>
                   {reference ? (
                     <div className="mt-6 w-full max-w-sm rounded-[6px] border border-brass-500/40 bg-brass-500/10 p-4">

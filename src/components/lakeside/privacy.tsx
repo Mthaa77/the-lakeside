@@ -33,8 +33,7 @@ const FACTS = [
     icon: Database,
     title: 'What this site keeps',
     points: [
-      'Enquiries, viewing bookings and estimates you send us (name, contact, wedding details).',
-      'Estimates you save stay on your own device — “your estimates on this device” is local storage, not our database.',
+      'Enquiries and viewing bookings you send us (name, contact, wedding details and your guest-count estimate).',
       'Nothing is sold, and we don’t run ads or trackers.',
     ],
   },
