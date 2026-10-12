@@ -67,7 +67,7 @@ export function ConsentNotice() {
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold text-pine-900">Your data, your device</p>
                 <p className="mt-1 text-xs leading-relaxed text-ink-600">
-                  Estimates, saved dates and preferences on this site live in your
+                  Saved dates and preferences on this site live in your
                   browser only. No ad trackers, no analytics cookies — nothing
                   leaves your device unless you send a form yourself.{' '}
                   <a

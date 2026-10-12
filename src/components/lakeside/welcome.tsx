@@ -19,8 +19,8 @@ import { cn } from '@/lib/utils';
 
 const STATS = [
   { n: '200', label: 'Guests, up to' },
+  { n: '14 ha', label: 'Gardens, lawns & water' },
   { n: '9', label: 'Rooms, up to 18 guests' },
-  { n: '14h', label: 'Coordinator, 08h00–22h00' },
   { n: 'Auto', label: 'Backup generator' },
 ] as const;
 
@@ -88,8 +88,8 @@ export function Welcome() {
             <em className="gold-gradient-text gold-gradient-text--deep gold-gradient-text--live">on the water.</em>
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-ink-600">
-            Small enough to know your names by the second visit; large enough to
-            hold two hundred of the people you love most.
+            Fourteen hectares of gardens, pines and still water in the countryside
+            east of Pretoria — a 30-minute drive from the city, a world away.
           </p>
         </Reveal>
 
@@ -106,9 +106,10 @@ export function Welcome() {
                 viewing to the last dance.
               </p>
               <p className="mt-5 text-pretty text-base leading-relaxed text-ink-600">
-                Glass chapel, marble reception on the water, a century-old slate
-                house and zebra on the lawn — all yours for the day, and for the
-                night after, with nine rooms kept for your wedding party.
+                Glass chapel opening its stacking doors over the lake, lemon trees
+                along the lawn, a heritage house more than a century old and
+                antelope grazing at a stone&rsquo;s throw — exclusive to you for the
+                day, with nine rooms kept for your wedding party after.
               </p>
             </Reveal>
 

@@ -22,6 +22,8 @@ export type YearRateCard = {
     lateSnacksPP: number;
     animalFeed: number;
     childU12: number;
+    serviceProviderPP: number;
+    secondMainPP: number;
     venueOT: number;
     barOT: number;
     venueBarOT: number;
@@ -49,6 +51,8 @@ export const PRICING = {
         lateSnacksPP: 70,
         animalFeed: 1600,
         childU12: 380,
+        serviceProviderPP: 560,
+        secondMainPP: 170,
         venueOT: 3000,
         barOT: 1500,
         venueBarOT: 4000,
@@ -68,6 +72,8 @@ export const PRICING = {
         lateSnacksPP: 80,
         animalFeed: 1700,
         childU12: 400,
+        serviceProviderPP: 600,
+        secondMainPP: 170,
         venueOT: 3300,
         barOT: 1600,
         venueBarOT: 4500,

@@ -282,8 +282,9 @@ export function ChefAccommodation() {
               <p className="mt-4 flex gap-2.5 text-xs leading-relaxed text-ink-600">
                 <CalendarClock className="mt-0.5 h-4 w-4 shrink-0 text-brass-600" aria-hidden="true" />
                 <span>
-                  Check-in from 13h00 (suites from 11h00) · check-out strictly 09h00 · no breakfast served.
-                  Late check-out {formatZAR(PRICING.fees.lateCheckoutPerRoomHour)} per room per hour.
+                  Check-in: Beauty Room from 08h00 · Bridal Suite &amp; Groom&rsquo;s Cabin from 11h00 ·
+                  rooms from 13h00. Check-out strictly 09h00 · no breakfast served · rooms are for your
+                  wedding party only. Late check-out {formatZAR(PRICING.fees.lateCheckoutPerRoomHour)} per room per hour.
                 </span>
               </p>
             </Reveal>

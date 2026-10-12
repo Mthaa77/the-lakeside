@@ -49,12 +49,12 @@ export const SITE = {
     profileUrl: '',
   },
   owners: [
-    { name: 'Penelope', role: 'Owner & Decor Specialist' },
-    { name: 'Callie', role: 'Owner & Wedding Specialist' },
-    { name: 'Chef Jenna', role: 'Lady of Delectable Delights' },
-    { name: 'Adam', role: 'Bar Manager & Event Coordinator' },
-    { name: 'Abi', role: 'Event Coordinator & Decor Specialist' },
-    { name: 'Kaye', role: 'Event Coordinator & Food Manager' },
+    { name: 'Penelope', role: 'Owner & Decor Specialist', line: 'The florals, the tables, the details that make the room yours — decor is designed in-house, with you.' },
+    { name: 'Callie', role: 'Owner & Wedding Specialist', line: 'Your first viewing to your last dance — the person who plans the day and holds the timeline.' },
+    { name: 'Chef Jenna', role: 'Lady of Delectable Delights', line: 'Menus designed with you, never copied from the last couple — four courses, your season, your story.' },
+    { name: 'Adam', role: 'Bar Manager & Event Coordinator', line: 'The bar and the floor — canapés flowing, glasses full and the schedule quietly on track.' },
+    { name: 'Abi', role: 'Event Coordinator & Decor Specialist', line: 'The mock-up, the setup, the final walkthrough — every detail dressed before your guests arrive.' },
+    { name: 'Kaye', role: 'Event Coordinator & Food Manager', line: 'Your menu, your RSVPs, your seating — the kitchen and the room, kept in step all day.' },
   ],
 } as const;
 

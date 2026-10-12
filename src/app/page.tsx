@@ -20,6 +20,8 @@ import { OrnamentRule } from '@/components/lakeside/ornament-rule';
 import { ConsentNotice } from '@/components/lakeside/consent-notice';
 import { PrivacyNotice } from '@/components/lakeside/privacy';
 import { PackageComparator, ProposalBuilder } from '@/components/lakeside/tools';
+import { DayBuilder } from '@/components/lakeside/day-builder';
+import { TeamBand } from '@/components/lakeside/team-band';
 import { Reveal } from '@/components/lakeside/reveal';
 import { CinematicInterlude } from '@/components/lakeside/cinematic-interlude';
 import { FloatingDock, MobileDock } from '@/components/lakeside/floating-dock';
@@ -123,6 +125,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Build your day — the rate card, alive (official 2026/2027 rates) */}
+        <DayBuilder />
+
         {/* Brass ornament in the marble seam between comparator and gallery */}
         <OrnamentRule className="bg-marble-50" />
 
@@ -170,6 +175,9 @@ export default function Home() {
           </div>
           <EstateExplorer />
         </section>
+
+        {/* The family — six names and roles from the official brochure */}
+        <TeamBand />
 
         <ChefAccommodation />
 

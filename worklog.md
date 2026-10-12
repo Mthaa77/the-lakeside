@@ -123,3 +123,28 @@ Stage Summary:
 - Vercel unblocked: user should retry the deployment (or push-to-deploy will trigger on next sync)
 - WARNING for future agents: the sandbox auto-committer may re-create commits as "Z User <z@container>" (e.g. UUID worklog commits). Repo-local git config now uses the correct identity for normal commits, but BEFORE EVERY PUSH run: git log --format='%an <%ae>' -1 — if the head (or any unpushed) commit shows z@container, squash/amend it into the correct identity (git reset --soft + recommit, or filter-branch) so Vercel doesn't block again
 - Future commits from this repo will be authored: Tshepiso Kadiaka <205148989+Mthaa77@users.noreply.github.com>
+
+---
+Task ID: 32
+Agent: Z.ai Code (main)
+Task: Official brochure integration — 2026 & 2027 packages PDF, persuasive interactives
+
+Work Log:
+- Read the official "The Lakeside — Wedding Packages 2026 & 2027" PDF (18 pages) end to end; cross-checked every rate against src/config/pricing.ts — existing config already matched (venue hire Sat 68k/Fri 58k/Sun 44k/Mon-Thu 34k, food & decor 1300/1400 pp, top-up 400, rooms 1700/1800 · 1900/2000 · 1900/2000, add-ons, minimums 80/60/40, capacity 160/200, 50% deposit)
+- ADDED to pricing.ts (official rates that were missing): addons.serviceProviderPP 560/600, addons.secondMainPP 170/170
+- NEW DayBuilder (#build, day-builder.tsx) — interactive rate-card planner between #compare and gallery: day-type chips (Sat/Fri/Sun/Mon-Thu with hire + minimums), guest slider clamped to per-day minimums, children-u/12 & service-provider steppers, year toggle 2026/2027, 7 add-on toggles (top-up/harvest/2-mains/late-snacks/lights/heaters/animal feed); gilded itemised ledger with aria-live total + per-adult line (verified exact: Fri 58 000 + 80×1300 + 80×400 + 80×90 = R 201 200); WhatsApp CTA prefills the human-readable build summary; "good to know" card carries minimums, winter specials, corkage rule, supplier meal rule. Hydration-safe (deterministic state)
+- NEW TeamBand (#team, team-band.tsx) — all six official team members (Penelope, Callie, Chef Jenna, Adam, Abi, Kaye) with PDF-verbatim roles, gilded monogram medallions (portraits pending consent), family promise band; wired into page.tsx between #explore and chef
+- WELCOME: official facts woven in — 14 hectares, 30 minutes east of Pretoria, heritage house 100+ years, lemon trees, antelope; stats row now 200 guests / 14 ha / 9 rooms / auto generator
+- PRICING: mini rate-grid extended to 12 printed rates (added Top Up, 2nd main, service provider); footnote now carries 50% deposit + first-come-first-served + winter specials (Jun-Aug)
+- STAY: check-in times now official (Beauty Room 08h00, Bridal Suite & Groom's Cabin 11h00, rooms 13h00, checkout 09h00) + wedding-party-only note
+- FAQ: added "Do you have winter specials?" entry
+- consent-notice: dropped the last public "Estimates" mention ("Saved dates and preferences…")
+- DELETED untracked zombie files (estimator.tsx, quote-nudge.tsx, shared-quote.tsx had reappeared on disk; gallery-arc.tsx orphan also removed)
+- FIXED REAL HYDRATION BUG: agent-browser caught a reproducible hydration mismatch — root cause was a STALE TURBOPACK DEV CHUNK (.next/dev/.../estate-explorer_tsx_fe5515e3._.js still serving pre-round-29 code with '#estimate' + seePrice) while SSR HTML was fresh; fix = kill dev server, rm -rf .next, restart; post-fix loads (?v=32/33/34) produce ZERO hydration errors (verified by error-tree URL mapping)
+- Sandbox quirk: executable-bit flips (100644→100755) on untouched tracked files — silenced with git config core.fileMode false
+- QA: lint clean; builder math verified interactively (day switch, add-on toggle, child stepper); WhatsApp summary human-readable; zero #estimate anchors; desktop 1280 + mobile 390 no h-scroll; team renders 6 cards; dev.log clean
+
+Stage Summary:
+- Site now carries the official brochure end to end: rates, inclusions, team, policies, winter note
+- New persuasive interactive: #build DayBuilder (transparent official-rate ledger → WhatsApp/viewing CTA)
+- Lesson recorded: stale Turbopack chunks cause phantom hydration mismatches — purge .next and restart the dev server when a hydration error cites code that no longer exists in src/

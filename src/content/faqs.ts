@@ -79,4 +79,9 @@ export const FAQS: Faq[] = [
     a: 'Yes — viewings are by appointment, in person or virtual. Book below and we’ll confirm a time. You can also start on WhatsApp.',
     cat: 'Visiting',
   },
+  {
+    q: 'Do you have winter specials?',
+    a: 'June, July and August carry Winter Specials — contact us directly for the season’s numbers. The glass chapel’s stacking doors close up cozy and the marble reception is indoors over the water, so winter weddings are beautiful here.',
+    cat: 'Booking',
+  },
 ];

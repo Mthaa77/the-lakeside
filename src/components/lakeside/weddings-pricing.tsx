@@ -137,11 +137,14 @@ export function WeddingsPricing() {
                   <RateRow label="Heritage room / night" value={formatZAR(card.rooms.heritage)} />
                   <RateRow label="Manor room / night" value={formatZAR(card.rooms.manor)} />
                   <RateRow label="Bridal Suite / night" value={formatZAR(card.rooms.suite)} />
+                  <RateRow label="Top Up per guest" value={formatZAR(card.topUpPP)} />
                   <RateRow label="Fairy lights" value={formatZAR(card.addons.fairyLights)} />
                   <RateRow label="Patio heaters" value={formatZAR(card.addons.patioHeaters)} />
                   <RateRow label="Late snacks per guest" value={formatZAR(card.addons.lateSnacksPP)} />
                   <RateRow label="Children under 12" value={formatZAR(card.addons.childU12)} />
                   <RateRow label="Harvest table per guest" value={formatZAR(card.addons.harvestTablePP)} />
+                  <RateRow label="Choice of 2 mains per guest" value={formatZAR(card.addons.secondMainPP)} />
+                  <RateRow label="Service provider" value={formatZAR(card.addons.serviceProviderPP)} />
                   <RateRow label="Animal feed" value={formatZAR(card.addons.animalFeed)} />
                 </div>
               </div>
@@ -149,6 +152,8 @@ export function WeddingsPricing() {
               <p className="mt-4 text-xs leading-relaxed text-marble-50/60">
                 Weekends: minimum paying adults apply (Sat 80 · Fri 60 · Sun &amp; Thu 40).
                 December and public holidays follow their own rules — the calendar below shows each day-type.
+                To secure your date: a 50% venue-hire deposit (weekends) with the signed T&amp;Cs —
+                bookings run first come, first served. June, July &amp; August: ask us directly for Winter Specials.
               </p>
             </Reveal>
 
