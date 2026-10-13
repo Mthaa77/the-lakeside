@@ -1,20 +1,22 @@
 'use client';
 
 /**
- * THE LAKESIDE — WELCOME (round 29, the receiving room)
- * A premium marble "receiving room" directly under the hero: family welcome
- * copy with a drop cap, a three-beat promise of how the day unfolds, the
- * owners' signature, a drifting collage of estate photos in gilded frames,
- * a floating family-run seal, and a verified-facts stats row.
- * Every claim below is on the client's verified-facts list — no founding
- * year, no invented history.
+ * THE LAKESIDE — WELCOME (round 33, the receiving room)
+ * A premium marble "receiving room" directly under the hero. Round 33 seats
+ * the client's official embossed brand seal at the head of the section —
+ * flanked by brass hairlines like a letterpress stamp — and lets the logo's
+ * own "EST. 1995" fact into the copy for the first time (the seal is the
+ * client's official brand mark, so the founding year is now client-verified).
+ * Round 29 still holds: family welcome copy with a drop cap, a three-beat
+ * promise of how the day unfolds, the owners' signature, a drifting collage
+ * of estate photos in gilded frames, and a verified-facts stats row.
  */
 
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Heart } from 'lucide-react';
 import { Reveal } from './reveal';
-import { OrnamentDivider } from './ornaments';
+import { BrandSeal } from './seal';
 import { cn } from '@/lib/utils';
 
 const STATS = [
@@ -30,32 +32,6 @@ const DAY_BEATS = [
   { t: 'Golden hour', d: 'Portraits on the deck, the lawns and the lake doing the rest.' },
   { t: 'Evening', d: 'Dinner under the chandeliers, sparklers out on the lawn.' },
 ] as const;
-
-/** Small spinning gold seal — shared visual language with the hero. */
-function MiniSeal({ className }: { className?: string }) {
-  return (
-    <div className={cn('relative h-16 w-16', className)} aria-hidden="true">
-      <svg viewBox="0 0 100 100" className="seal-spin h-full w-full">
-        <defs>
-          <path id="seal-mini-arc" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" fill="none" />
-        </defs>
-        <text
-          className="fill-brass-600"
-          style={{
-            fontSize: '11.5px',
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            fontWeight: 600,
-            fontFamily: 'var(--font-body), sans-serif',
-          }}
-        >
-          <textPath href="#seal-mini-arc">Family-Run · Family-Run ·</textPath>
-        </text>
-      </svg>
-      <span className="wax-dot absolute left-1/2 top-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
-    </div>
-  );
-}
 
 export function Welcome() {
   const reduced = useReducedMotion();
@@ -78,10 +54,24 @@ export function Welcome() {
       <div aria-hidden="true" className="gold-bloom pointer-events-none absolute -right-24 -top-24 h-[420px] w-[420px] opacity-60" />
       <div aria-hidden="true" className="ruby-bloom pointer-events-none absolute -left-32 bottom-0 h-[380px] w-[380px] opacity-25" />
 
+      {/* Ghost of the brand seal — an embossed watermark pressed into the marble,
+          echoing the stamp at the head of the section (round 33) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-28 bottom-2 hidden opacity-[0.05] mix-blend-multiply lg:block"
+      >
+        <BrandSeal tone="stamp" className="size-[400px]" />
+      </div>
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header — the official brand seal, stamped into the marble between
+            brass hairlines (round 33). The logo itself carries "EST. 1995". */}
         <Reveal variant="cine" className="mx-auto max-w-2xl text-center">
-          <OrnamentDivider tone="brass" center="rings" className="mb-6" />
+          <div className="mb-7 flex items-center justify-center gap-5 sm:gap-7">
+            <span aria-hidden="true" className="h-px w-14 bg-gradient-to-r from-transparent to-brass-500/50 sm:w-24" />
+            <BrandSeal tone="stamp" className="size-24 sm:size-28" />
+            <span aria-hidden="true" className="h-px w-14 bg-gradient-to-l from-transparent to-brass-500/50 sm:w-24" />
+          </div>
           <p className="eyebrow eyebrow-dash text-brass-600">Welcome to The Lakeside</p>
           <h2 className="mt-3 font-display text-4xl font-medium text-balance text-pine-900 sm:text-5xl">
             A family-run estate{' '}
@@ -89,7 +79,8 @@ export function Welcome() {
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-ink-600">
             Fourteen hectares of gardens, pines and still water in the countryside
-            east of Pretoria — a 30-minute drive from the city, a world away.
+            east of Pretoria — welcoming weddings since 1995. A 30-minute drive
+            from the city, a world away.
           </p>
         </Reveal>
 
@@ -104,6 +95,10 @@ export function Welcome() {
                 he Lakeside is run by a small family team: Penelope and Callie,
                 Chef Jenna and the coordinators who stay with you from the first
                 viewing to the last dance.
+              </p>
+              <p className="mt-5 text-pretty text-base leading-relaxed text-ink-600">
+                Family-run since 1995 — three decades of weddings on this water,
+                and a name on the gate that still answers its own phone.
               </p>
               <p className="mt-5 text-pretty text-base leading-relaxed text-ink-600">
                 Glass chapel opening its stacking doors over the lake, lemon trees
@@ -244,13 +239,14 @@ export function Welcome() {
                 />
               </motion.figure>
 
-              {/* Floating mini seal — top-left of the main frame */}
+              {/* The official brand seal — a stamped coin on a paper chip,
+                  top-left of the main frame (round 33) */}
               <motion.div
                 style={reduced ? undefined : { y: sideY }}
-                className="absolute -left-2 -top-6 rounded-full bg-marble-50/90 p-1.5 shadow-[0_14px_30px_-14px_rgba(16,38,30,0.5)] backdrop-blur lg:-left-2"
+                className="absolute -left-2 -top-7 rounded-full bg-marble-50/95 p-1.5 shadow-[0_18px_36px_-16px_rgba(16,38,30,0.55)] ring-1 ring-brass-500/25 backdrop-blur lg:-left-1"
                 aria-hidden="true"
               >
-                <MiniSeal />
+                <BrandSeal className="size-14 sm:size-16" />
               </motion.div>
 
               {/* Ruby family-run chip — bottom-right */}

@@ -12,6 +12,7 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Reveal } from './reveal';
+import { BrandSeal } from './seal';
 import { ArrowRight } from 'lucide-react';
 
 export function CinematicInterlude() {
@@ -72,9 +73,10 @@ export function CinematicInterlude() {
               Sunset toasts on the deck. First dance under the chandeliers. Sparklers
               on the lawn. The estate holds the light a little longer for its couples.
             </p>
-            <div className="mt-8 flex items-center justify-center gap-3">
+            <div className="mt-8 flex items-center justify-center gap-4">
               <span className="brass-hairline w-10" aria-hidden="true" />
-              <span className="size-1.5 rotate-45 border border-brass-400" aria-hidden="true" />
+              {/* The official seal — a wax stamp pressed into the film frame (r33) */}
+              <BrandSeal className="size-12" />
               <span className="brass-hairline w-10" aria-hidden="true" />
             </div>
             <a

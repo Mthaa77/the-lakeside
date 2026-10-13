@@ -39,6 +39,7 @@ import { SITE } from '@/config/site';
 import { PRICING } from '@/config/pricing';
 import { Rings } from './ornaments';
 import { LogoMark } from './logo';
+import { BrandSeal } from './seal';
 import { DemoStrip } from './demo-strip';
 
 const NAV = [
@@ -209,20 +210,13 @@ export function Header() {
 
         {/* ── Main bar ──────────────────────────────────────────────────── */}
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Brand — typographic lockup with a gold ring accent */}
+          {/* Brand — the official embossed seal + typographic lockup */}
           <a
             href="#top"
             className="group flex shrink-0 items-center gap-3"
             aria-label="The Lakeside — back to top"
           >
-            <span
-              aria-hidden="true"
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-gold-300/85 via-brass-500/55 to-ruby-400/40 p-[1.5px] shadow-[0_10px_28px_-12px_rgba(184,155,106,0.9)] transition-shadow duration-500 group-hover:shadow-[0_12px_34px_-10px_rgba(222,184,110,0.85)]"
-            >
-              <span className="grid h-full w-full place-items-center rounded-full bg-pine-950 font-display text-[13px] font-medium text-gold-300">
-                TL
-              </span>
-            </span>
+            <BrandSeal className="size-10 shrink-0 transition-all duration-500 group-hover:scale-[1.05] group-hover:shadow-[0_14px_34px_-10px_rgba(222,184,110,0.55)]" />
             <LogoMark
               variant="dark"
               className={cn(
@@ -371,14 +365,7 @@ export function Header() {
           {/* Top row: brand + close */}
           <div className="relative flex items-center justify-between px-6 pb-4 pt-5">
             <span className="flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-gold-300/80 via-brass-500/50 to-ruby-400/40 p-[1.5px]"
-              >
-                <span className="grid h-full w-full place-items-center rounded-full bg-pine-950 font-display text-[13px] font-medium text-gold-300">
-                  TL
-                </span>
-              </span>
+              <BrandSeal className="size-10 shrink-0" />
               <LogoMark variant="dark" className="text-[7.5px]" />
             </span>
             <button

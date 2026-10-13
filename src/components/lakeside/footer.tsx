@@ -12,8 +12,8 @@
 
 import { SITE, RATING_FRESH } from '@/config/site';
 import { Instagram, Facebook, MapPin, Phone, Mail, Clock, ArrowUp } from 'lucide-react';
-import { Rings } from './ornaments';
 import { LogoMark } from './logo';
+import { BrandSeal } from './seal';
 import { RatingBadge } from './rating-badge';
 
 const EXPLORE_LINKS = [
@@ -61,26 +61,28 @@ export function Footer() {
 
   return (
     <footer className="relative bg-pine-950 text-marble-50">
-      {/* The gold seam — one crisp hairline, medallion straddling it */}
+      {/* The gold seam — one crisp hairline, the official brand seal straddling it
+          like a wax stamp pressed over the page break (round 33) */}
       <div aria-hidden="true" className="relative">
         <div className="h-px w-full bg-gradient-to-r from-transparent via-gold-300/60 to-transparent" />
-        <div className="mx-auto -mt-[26px] flex max-w-7xl justify-center px-4">
-          <span className="grid size-[52px] place-items-center rounded-full bg-pine-950 shadow-[inset_0_0_0_1px_rgba(237,214,164,0.35)]">
-            <Rings className="h-6 w-auto text-gold-300" />
-          </span>
+        <div className="mx-auto -mt-7 flex max-w-7xl justify-center px-4">
+          <BrandSeal className="size-14" />
         </div>
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-12 sm:px-6 lg:px-8 lg:pb-10">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-          {/* Brand */}
+          {/* Brand — the official seal over the typographic lockup */}
           <div className="lg:col-span-4">
-            <LogoMark variant="dark" className="text-[10px]" />
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-marble-50/65">
+            <div className="flex flex-col items-center sm:items-start">
+              <BrandSeal className="size-20 sm:size-24" />
+              <LogoMark variant="dark" className="mt-6 text-[10px]" />
+            </div>
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-marble-50/65 sm:max-w-none lg:max-w-xs">
               A family-run wedding and events estate in Tiegerpoort, Pretoria East.
               Where glass meets lake — and your guests meet the zebras.
             </p>
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-6 flex items-center justify-center gap-3 sm:justify-start">
               {SOCIALS.map((s) => {
                 const inner = s.icon ? (
                   <s.icon className="h-4 w-4" aria-hidden="true" />

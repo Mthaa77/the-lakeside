@@ -17,6 +17,7 @@
  */
 
 import { cn } from '@/lib/utils';
+import { BrandSeal } from './seal';
 
 // ── Shared static definitions ────────────────────────────────────────────────
 
@@ -197,7 +198,10 @@ export function OrnamentDivider({
 // ── Rotating circular seal ───────────────────────────────────────────────────
 
 /**
- * Slow-spinning circular text seal with the interlocked rings at its heart.
+ * Slow-spinning circular text seal. The heart of the seal is either the
+ * interlocked rings (`center="rings"`) or the official embossed brand seal
+ * (`center="brand"`, round 33) — a still medallion in the spinning text ring,
+ * like a wax seal under a rotating engraving.
  * `dark` seats it on a frosted light disc (for dark surfaces), `light` on a
  * marble disc (for light surfaces).
  */
@@ -205,10 +209,12 @@ export function CircularSeal({
   text,
   className,
   theme = 'dark',
+  center = 'rings',
 }: {
   text: string;
   className?: string;
   theme?: 'dark' | 'light';
+  center?: 'rings' | 'brand';
 }) {
   return (
     <div
@@ -235,7 +241,7 @@ export function CircularSeal({
           <textPath href="#lsseal-path">{text}</textPath>
         </text>
       </svg>
-      <Rings className="h-7 w-auto text-gold-300" />
+      {center === 'brand' ? <BrandSeal className="size-14" /> : <Rings className="h-7 w-auto text-gold-300" />}
     </div>
   );
 }

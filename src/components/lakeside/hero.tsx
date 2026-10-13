@@ -369,12 +369,13 @@ export function Hero() {
         <span className="h-20 w-px bg-gradient-to-t from-transparent to-gold-300/60" />
       </div>
 
-      {/* Rotating seal — lower right, inside the gilded frame (xl+) */}
+      {/* Rotating seal — lower right, inside the gilded frame (xl+). The
+          official embossed brand seal sits at its heart (round 33). */}
       <div
         aria-hidden="true"
         className="absolute bottom-24 right-10 z-10 hidden xl:block"
       >
-        <CircularSeal text="The Lakeside · Weddings · Family-Run · " theme="dark" />
+        <CircularSeal text="The Lakeside · Weddings · Family-Run · " theme="dark" center="brand" />
       </div>
 
       {/* Scroll cue — invites the first scroll, hides once the page moves */}

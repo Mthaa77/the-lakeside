@@ -148,3 +148,27 @@ Stage Summary:
 - Site now carries the official brochure end to end: rates, inclusions, team, policies, winter note
 - New persuasive interactive: #build DayBuilder (transparent official-rate ledger → WhatsApp/viewing CTA)
 - Lesson recorded: stale Turbopack chunks cause phantom hydration mismatches — purge .next and restart the dev server when a hydration error cites code that no longer exists in src/
+
+---
+Task ID: 33
+Agent: Z.ai Code (main)
+Task: Integrate the client's official embossed logo across the homepage + welcome-section upgrade
+
+Work Log:
+- Client uploaded the official brand logo: embossed gold/green circular seal on cream paper ("THE LAKESIDE · EST. 1995 · WEDDINGS & EVENTS"), 2048×2048 JPG at upload/Upgrade_2K_20261013015531.jpg
+- scripts/prepare-seal-assets.js (sharp): auto-detects artwork bounds, emits public/brand/lakeside-seal.jpg (960px, q80, ~160KB) + regenerated icon-32/180/192/512.png with circular alpha masks, palette-quantized (icon-512: 544KB→159KB). Full-frame crop kept (embossed ring sits inset ~3% inside any CSS circle — nothing clips)
+- NEW src/components/lakeside/seal.tsx — BrandSeal component, two tones: "coin" (gold-rimmed medallion for dark surfaces) and "stamp" (mix-blend-multiply letterpress for marble). Decorative by default (alt="" + aria-hidden); deterministic/SSR-safe
+- HEADER: replaced both "TL" monogram chips (desktop bar + mobile menu) with the real seal (size-10); LogoMark wordmark unchanged
+- HERO: CircularSeal (ornaments.tsx) gained center="brand" — the rotating gold text ring now spins around the still embossed medallion (wax-seal-under-engraving look), hero bottom-right xl+
+- WELCOME (main upgrade): seal centerpiece (size-24/28, stamp tone) between brass hairlines above the eyebrow; MiniSeal SVG deleted, replaced by real coin on paper chip at collage top-left; 400px stamp watermark ghost (opacity 5%, multiply) pressed into the marble bottom-left; logo's own "EST. 1995" fact entered the copy for the first time — lede now "welcoming weddings since 1995", new editorial line "Family-run since 1995 — three decades of weddings on this water, and a name on the gate that still answers its own phone." (founding year is now client-verified via the official seal)
+- CINEMATIC INTERLUDE: diamond ornament swapped for a size-12 wax-stamp seal between hairlines
+- FOOTER: seam medallion (Rings-in-circle) replaced by the real seal straddling the gold hairline (size-14); brand column gained seal (size-20/24) above the LogoMark lockup, socials centered on mobile
+- Favicon/PWA: icon files replaced in place — layout.tsx metadata + manifest.webmanifest already pointed at those paths, zero config change needed
+- INCIDENT: sandbox process had CLOBBERED .gitignore down to "skills/\nnode_modules/" (would have committed .env/db/dev.log/upload on git add -A). Restored from HEAD (git checkout HEAD -- .gitignore); verified .env db dev.log upload .next skills all ignored
+- QA (agent-browser): zero console errors; seal asset serves 200 image/jpeg; verified navbar coin over hero + glass scrolled state, hero rotating seal (1280 & 1440), welcome centerpiece + collage chip + watermark, interlude stamp, footer seam + brand block, mobile 390px welcome + menu; no horizontal scroll (390 & desktop); lint clean
+
+Stage Summary:
+- The official embossed logo is now the brand object across the whole homepage: navbar (persistent), mobile menu, hero medallion, welcome centerpiece/chip/watermark, interlude stamp, footer seam + brand column, favicon + PWA icons
+- Round 25's "no founding year" rule is superseded: EST. 1995 comes from the client's official logo — safe to use in copy
+- Committed locally as round 33. Push NOT attempted: no GitHub token in this session (per worklog 29-b/30, token is never persisted). When the user supplies one: git -c credential.helper='!f() { echo "username=Mthaa77"; echo "password=$TOKEN"; }; f' push origin main (repo-local author config already correct: Tshepiso Kadiaka <205148989+Mthaa77@users.noreply.github.com>)
+- Future candidates: compose the seal onto og.jpg; team-band portraits once consent lands
